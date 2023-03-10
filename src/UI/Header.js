@@ -16,8 +16,8 @@ function Header() {
                         <Nav.Link><Link to="/" style={{ textDecoration: 'none', 'color':'black' }}><Nav>INICIO</Nav></Link></Nav.Link>
                             <Nav.Link><Link to="/tienda" style={{ textDecoration: 'none' , 'color':'black'}}>TIENDA</Link></Nav.Link>
                             <Nav.Link><Link to="/acerca" style={{ textDecoration: 'none', 'color':'black' }}>ACERCA DE</Link></Nav.Link>
-                            <Link to="/" style={{ textDecoration: 'none', 'color':'black' }}><Nav.Link><Person /></Nav.Link></Link>
-                            <Link to="/carrito" style={{ textDecoration: 'none', 'color':'black' }}><Nav.Link><Bag /></Nav.Link></Link>
+                            <Nav.Link><Link to="/login" style={{ textDecoration: 'none', 'color':'black' }}><Person /></Link></Nav.Link>
+                            <Nav.Link><Link to="/carrito" style={{ textDecoration: 'none', 'color':'black' }}><Bag /></Link></Nav.Link>
                         </Nav>
                     </Container>
                 </Navbar>

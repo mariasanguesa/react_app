@@ -5,6 +5,7 @@ import ErrorPage from "./Pages/ErrorPage";
 import Header from "./UI/Header";
 import Tienda from "./Pages/Tienda";
 import Acerca from "./Pages/Acerca";
+import Login from "./Pages/Login";
 
 function App() {
   return (
