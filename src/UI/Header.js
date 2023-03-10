@@ -2,7 +2,8 @@ import './Header.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {Person, Bag} from 'react-bootstrap-icons';
+import { Person, Bag } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
@@ -10,13 +11,13 @@ function Header() {
             <div variant="d-flex">
                 <Navbar style={{ 'height': '70px' }}>
                     <Container >
-                        <Navbar.Brand href="/"><b>BARRAS GO</b></Navbar.Brand>
+                        <Navbar.Brand><b>BARRAS GO</b></Navbar.Brand>
                         <Nav>
-                            <Nav.Link href="/">INICIO</Nav.Link>
-                            <Nav.Link href="/tienda">TIENDA</Nav.Link>
-                            <Nav.Link href="/acerca">ACERCA DE</Nav.Link>
-                            <Nav.Link><Person/></Nav.Link>
-                            <Nav.Link><Bag/></Nav.Link>
+                        <Nav.Link><Link to="/" style={{ textDecoration: 'none', 'color':'black' }}><Nav>INICIO</Nav></Link></Nav.Link>
+                            <Nav.Link><Link to="/tienda" style={{ textDecoration: 'none' , 'color':'black'}}>TIENDA</Link></Nav.Link>
+                            <Nav.Link><Link to="/acerca" style={{ textDecoration: 'none', 'color':'black' }}>ACERCA DE</Link></Nav.Link>
+                            <Link to="/" style={{ textDecoration: 'none', 'color':'black' }}><Nav.Link><Person /></Nav.Link></Link>
+                            <Link to="/carrito" style={{ textDecoration: 'none', 'color':'black' }}><Nav.Link><Bag /></Nav.Link></Link>
                         </Nav>
                     </Container>
                 </Navbar>

@@ -15,6 +15,7 @@ function App() {
         <Route path="/carrito" element={<Carrito />}></Route>
         <Route path="/tienda" element={<Tienda />}></Route>
         <Route path="/acerca" element={<Acerca />}></Route>
+        <Route path="/login" element={<Login />}></Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
