@@ -1,15 +1,19 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useEffect,useState } from 'react';
+import { useEffect,useState, useContext } from 'react';
 import axios from "axios";
+import DBContext from '../store/DBContext';
 
 const Login = () => {
 
     const [loginDb, setLoginDb] = useState([]);
 
+    const imageContext = useContext(DBContext).url;
+    alert(imageContext);
+
     useEffect(() => {
-        axios.get('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/login.json')
+        axios.get(imageContext)
             .then((response) => {
                 setLoginDb(response.data);
             })
