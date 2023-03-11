@@ -6,33 +6,34 @@ const Login = () => {
     return (
         <>
             <br></br>
+            <br></br>
             <Container>
 
                 <Row className="justify-content-md-center">
-                    <Col>
-                        <div className="Auth-form-container">
+                    <Col className="border-end">
+                        <div className="Auth-form-container ">
                             <form className="Auth-form">
                                 <div className="Auth-form-content">
                                     <h3 className="Auth-form-title">Inicia sesión</h3>
                                     <div className="form-group mt-3">
-                                        <label>Email address</label>
+                                        <label>Email</label>
                                         <input
                                             type="email"
                                             className="form-control mt-1"
-                                            placeholder="Enter email"
+                                            placeholder="Introducir email"
                                         />
                                     </div>
                                     <div className="form-group mt-3">
-                                        <label>Password</label>
+                                        <label>Contraseña</label>
                                         <input
                                             type="password"
                                             className="form-control mt-1"
-                                            placeholder="Enter password"
+                                            placeholder="Introducir contraseña"
                                         />
                                     </div>
                                     <div className="d-grid gap-2 mt-3">
-                                        <button type="submit" className="btn btn-primary">
-                                            Submit
+                                        <button type="submit" className="btn btn-outline-dark">
+                                            Inciar sesión
                                         </button>
                                     </div>
                                 </div>
