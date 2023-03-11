@@ -1,16 +1,29 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useEffect,useState } from 'react';
+import axios from "axios";
 
 const Login = () => {
+
+    const [loginDb, setLoginDb] = useState([]);
+
+    useEffect(() => {
+        axios.get('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/login.json')
+            .then((response) => {
+                setLoginDb(response.data);
+            })
+    }, []);
+
     return (
         <>
             <br></br>
             <br></br>
-            <Container>
+            <br></br>
+            <Container className="gap-3">
 
-                <Row className="justify-content-md-center">
-                    <Col className="border-end">
+                <Row className="justify-content-md-center gap-3 mx-auto" >
+                    <Col className="border-end" md={4} >
                         <div className="Auth-form-container ">
                             <form className="Auth-form">
                                 <div className="Auth-form-content">
@@ -40,8 +53,8 @@ const Login = () => {
                             </form>
                         </div>
                     </Col>
-                    <Col>
-                        <p>Aquí se puede añadir una imagen y un link a registrarse</p>
+                    <Col md={4}>
+                        <img alt='' style={{ 'width': '500px' }} src={loginDb.imagen} />
                     </Col>
                 </Row>
 
