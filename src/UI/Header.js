@@ -1,4 +1,3 @@
-import './Header.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -15,7 +14,6 @@ function Header() {
                         <Nav>
                         <Nav.Link><Link to="/" style={{ textDecoration: 'none', 'color':'black' }}><Nav>INICIO</Nav></Link></Nav.Link>
                             <Nav.Link><Link to="/tienda" style={{ textDecoration: 'none' , 'color':'black'}}>TIENDA</Link></Nav.Link>
-                            <Nav.Link><Link to="/acerca" style={{ textDecoration: 'none', 'color':'black' }}>ACERCA DE</Link></Nav.Link>
                             <Nav.Link><Link to="/login" style={{ textDecoration: 'none', 'color':'black' }}><Person /></Link></Nav.Link>
                             <Nav.Link><Link to="/carrito" style={{ textDecoration: 'none', 'color':'black' }}><Bag /></Link></Nav.Link>
                         </Nav>

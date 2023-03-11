@@ -10,7 +10,6 @@ const Login = () => {
     const [loginDb, setLoginDb] = useState([]);
 
     const imageContext = useContext(DBContext).url;
-    alert(imageContext);
 
     useEffect(() => {
         axios.get(imageContext)
