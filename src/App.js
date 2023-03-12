@@ -5,16 +5,16 @@ import ErrorPage from "./Pages/ErrorPage";
 import Header from "./UI/Header";
 import Tienda from "./Pages/Tienda";
 import Login from "./Pages/Login";
-import DBContext from './store/DBContext'
+import DBImageContext from './store/DBImageContext'
 import {useState} from 'react';
 
 function App() {
 
-  const [url, setUrl] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/login.json');
+  const [url, setUrl] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/imagenes.json');
 
   return (
     <div>
-      <DBContext.Provider value={{  url:url }}></DBContext.Provider>
+      <DBImageContext.Provider value={{  url:url }}></DBImageContext.Provider>
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>

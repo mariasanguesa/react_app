@@ -3,13 +3,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect,useState, useContext } from 'react';
 import axios from "axios";
-import DBContext from '../store/DBContext';
+import DBImageContext from '../store/DBImageContext';
 
 const Login = () => {
 
     const [loginDb, setLoginDb] = useState([]);
 
-    const imageContext = useContext(DBContext).url;
+    const imageContext = useContext(DBImageContext).url;
 
     useEffect(() => {
         axios.get(imageContext)
@@ -57,7 +57,7 @@ const Login = () => {
                         </div>
                     </Col>
                     <Col md={4}>
-                        <img alt='' style={{ 'width': '500px' }} src={loginDb.imagen} />
+                        <img alt='' style={{ 'width': '500px' }} src={loginDb.login} />
                     </Col>
                 </Row>
 
