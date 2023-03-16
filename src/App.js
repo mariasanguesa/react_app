@@ -5,16 +5,19 @@ import ErrorPage from "./Pages/ErrorPage";
 import Header from "./UI/Header";
 import Tienda from "./Pages/Tienda";
 import Login from "./Pages/Login";
-import DBImageContext from './store/DBImageContext'
+import DBImageContext from './store/DBImageContext';
+import DBCartContext from './store/DBCartContext';
 import {useState} from 'react';
 
 function App() {
 
-  const [url, setUrl] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/imagenes.json');
+  const [urlImage, setUrlImage] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/imagenes.json');
+  const [urlCart, setUrlCart] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito.json');
 
   return (
     <div>
-      <DBImageContext.Provider value={{  url:url }}></DBImageContext.Provider>
+      <DBImageContext.Provider value={{  url:urlImage }}></DBImageContext.Provider>
+      <DBCartContext.Provider value={{  url:urlCart }}></DBCartContext.Provider>
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>

@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useEffect,useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import DBImageContext from '../store/DBImageContext';
 
@@ -11,12 +11,37 @@ const Login = () => {
 
     const imageContext = useContext(DBImageContext).url;
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     useEffect(() => {
         axios.get(imageContext)
             .then((response) => {
                 setLoginDb(response.data);
             })
     }, []);
+
+    const submitHandler = (event) => {
+        // Para que no recarge la pagina
+        event.preventDefault();
+        const authData = {
+            email: email,
+            password: password,
+            // Genera el token que queremos
+            returnSecureToken: true
+        }
+
+        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAz2len4LT2BmdNFZEQqzUF1j3hB-xtUsw', authData)
+            .then((response) => {
+                //props.actualizarLogin(true, response.data);
+                alert('El usuario se ha logueado');
+            })
+            .catch((error) => {
+                alert('No se ha encontrado el usuario');
+            })
+
+
+    }
 
     return (
         <>
@@ -28,12 +53,14 @@ const Login = () => {
                 <Row className="justify-content-md-center gap-3 mx-auto" >
                     <Col className="border-end" md={4} >
                         <div className="Auth-form-container ">
-                            <form className="Auth-form">
+                            <form onSubmit={submitHandler} className="Auth-form">
                                 <div className="Auth-form-content">
                                     <h3 className="Auth-form-title">Inicia sesión</h3>
                                     <div className="form-group mt-3">
                                         <label>Email</label>
                                         <input
+                                            onChange={(event) => { setEmail(event.target.value) }}
+                                            value={email}
                                             type="email"
                                             className="form-control mt-1"
                                             placeholder="Introducir email"
@@ -42,6 +69,8 @@ const Login = () => {
                                     <div className="form-group mt-3">
                                         <label>Contraseña</label>
                                         <input
+                                            onChange={(event) => { setPassword(event.target.value) }}
+                                            value={password}
                                             type="password"
                                             className="form-control mt-1"
                                             placeholder="Introducir contraseña"
