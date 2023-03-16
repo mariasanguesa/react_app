@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import ProductoCarrito from '../Components/ProductoCarrito';
+import DBCartContext from '../store/DBCartContext';
 
 const ProductosCarrito = () => {
 
     const [productos, setProductos] = useState([])
+    const cartContext = useContext(DBCartContext).url;
 
     useEffect(() => {
-        axios.get('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito.json')
+        axios.get(cartContext)
             .then((response) => {
                 let arrayCarrito = [];
                 for (let key in response.data) {
