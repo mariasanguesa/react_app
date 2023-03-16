@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
-import ProductoCarrito from '../Components/ProductoCarrito';
+import ProductosCarrito from "../Components/ProductosCarrito";
 
 const Carrito = () => {
 
@@ -21,7 +21,7 @@ const Carrito = () => {
                             <p>Mi carrito</p>
                         </div>
                         <div >
-                            <ProductoCarrito/>
+                            <ProductosCarrito/>
                         </div>
                     </Col>
                     <Col md={3}>

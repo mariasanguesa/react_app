@@ -3,7 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-const ProductoCarrito = () => {
+const ProductoCarrito = (props) => {
+
+    const numberHandler = () => {
+
+    }
+
     return (
         <>
             <Container className="border-bottom">
@@ -14,7 +19,8 @@ const ProductoCarrito = () => {
                     <Col>
                         <Container>
                             <Row>
-                                <p><b>Nombre del producto</b></p>
+                                
+                                <p><b>{props.producto.idProducto}</b></p>
                             </Row>
                             <Row>
                                 <p>Precio</p>
@@ -23,7 +29,7 @@ const ProductoCarrito = () => {
                     </Col>
                     <Col>
                         <Button size="sm" variant="outline-dark">-</Button>
-                        <input className="border-0 w-25 text-center" value="0"></input>
+                        <input className="border-0 w-25 text-center" value={props.producto.numProducto} onChange={numberHandler}></input>
                         <Button size="sm" variant="outline-dark">+</Button>
                     </Col>
                     <Col>
