@@ -12,12 +12,11 @@ const ProductosCarrito = (props) => {
         axios.get(cartContext)
             .then((response) => {
                 let arrayCarrito = [];
-                for (let key in response.data) {
-                    console.log(key)
+                for (let id in response.data) {
                     arrayCarrito.push({
-                        id:key,
-                        email: response.data[key].email,
-                        comprados: response.data[key].productos,
+                        id: id,
+                        email: response.data[id].email,
+                        comprados: response.data[id].productos,
                     })
                 }
                 setProductos(arrayCarrito);
@@ -35,12 +34,10 @@ const ProductosCarrito = (props) => {
     if (productos.length > 0) {
         contenido = <div>
             {productos[0].comprados.map((elemento) => {
-                return(
-                    <>
-                        <ProductoCarrito key={productos.id} producto={elemento}/>
-                    </>
+                console.log(elemento)
+                return (
+                    <ProductoCarrito key={elemento.idProducto} producto={elemento} />
                 )
-                
             })}
 
         </div>

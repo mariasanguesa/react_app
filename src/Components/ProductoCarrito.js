@@ -19,7 +19,7 @@ const ProductoCarrito = (props) => {
                     <Col>
                         <Container>
                             <Row>
-                                
+
                                 <p><b>{props.producto.idProducto}</b></p>
                             </Row>
                             <Row>
