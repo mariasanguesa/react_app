@@ -12,10 +12,10 @@ function Header() {
                     <Container >
                         <Navbar.Brand><b>BARRAS GO</b></Navbar.Brand>
                         <Nav>
-                        <Nav.Link><Link to="/" style={{ textDecoration: 'none', 'color':'black' }}><Nav>INICIO</Nav></Link></Nav.Link>
-                            <Nav.Link><Link to="/tienda" style={{ textDecoration: 'none' , 'color':'black'}}>TIENDA</Link></Nav.Link>
-                            <Nav.Link><Link to="/login" style={{ textDecoration: 'none', 'color':'black' }}><Person /></Link></Nav.Link>
-                            <Nav.Link><Link to="/carrito" style={{ textDecoration: 'none', 'color':'black' }}><Bag /></Link></Nav.Link>
+                            <Link to="/" style={{ textDecoration: 'none', 'color': 'black', margin:'10px' }}><Nav>INICIO</Nav></Link>
+                            <Link to="/tienda" style={{ textDecoration: 'none', 'color': 'black', margin:'10px' }}>TIENDA</Link>
+                            <Link to="/login" style={{ textDecoration: 'none', 'color': 'black', margin:'10px' }}><Person /></Link>
+                            <Link to="/carrito" style={{ textDecoration: 'none', 'color': 'black', margin:'10px' }}><Bag /></Link>
                         </Nav>
                     </Container>
                 </Navbar>

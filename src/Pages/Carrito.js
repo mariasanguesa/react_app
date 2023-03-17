@@ -7,7 +7,7 @@ import ProductosCarrito from "../Components/ProductosCarrito";
 const Carrito = (props) => {
 
     let contenido = <></>;
-
+    
     if (props.idToken) {
         contenido = <Container className="gap-3">
             <Row className="justify-content-md-center  mx-auto" >
@@ -16,6 +16,7 @@ const Carrito = (props) => {
                         <p>Mi carrito</p>
                     </div>
                     <div >
+                        
                         <ProductosCarrito idToken={props.idToken} />
                     </div>
                 </Col>

@@ -13,6 +13,7 @@ const ProductosCarrito = (props) => {
             .then((response) => {
                 let arrayCarrito = [];
                 for (let key in response.data) {
+                    console.log(key)
                     arrayCarrito.push({
                         id:key,
                         email: response.data[key].email,
@@ -36,7 +37,7 @@ const ProductosCarrito = (props) => {
             {productos[0].comprados.map((elemento) => {
                 return(
                     <>
-                        <ProductoCarrito key={Math.random().toString()} producto={elemento}/>
+                        <ProductoCarrito key={productos.id} producto={elemento}/>
                     </>
                 )
                 
