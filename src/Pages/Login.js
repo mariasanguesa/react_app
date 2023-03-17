@@ -4,8 +4,9 @@ import Col from 'react-bootstrap/Col';
 import { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import DBImageContext from '../store/DBImageContext';
+import Button from 'react-bootstrap/Button';
 
-const Login = () => {
+const Login = (props) => {
 
     const [loginDb, setLoginDb] = useState([]);
 
@@ -13,6 +14,7 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
 
     useEffect(() => {
         axios.get(imageContext)
@@ -33,7 +35,7 @@ const Login = () => {
 
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAz2len4LT2BmdNFZEQqzUF1j3hB-xtUsw', authData)
             .then((response) => {
-                //props.actualizarLogin(true, response.data);
+                props.actualizarLogin(true, response.data);
                 alert('El usuario se ha logueado');
             })
             .catch((error) => {
@@ -42,6 +44,12 @@ const Login = () => {
 
 
     }
+
+    const logoutHandler = () => {
+
+        props.actualizarLogin(false, {});
+    }
+
 
     return (
         <>
@@ -84,6 +92,9 @@ const Login = () => {
                                 </div>
                             </form>
                         </div>
+                    </Col>
+                    <Col>
+                        <Button onClick={logoutHandler} variant="warning" >Logout</Button>
                     </Col>
                     <Col md={4}>
                         <img alt='' style={{ 'width': '500px' }} src={loginDb.login} />

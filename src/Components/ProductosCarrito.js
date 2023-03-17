@@ -3,7 +3,7 @@ import axios from "axios";
 import ProductoCarrito from '../Components/ProductoCarrito';
 import DBCartContext from '../store/DBCartContext';
 
-const ProductosCarrito = () => {
+const ProductosCarrito = (props) => {
 
     const [productos, setProductos] = useState([])
     const cartContext = useContext(DBCartContext).url;
