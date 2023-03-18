@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import DBImageContext from '../store/DBImageContext';
+import AutContext from '../store/AutContext';
 import Button from 'react-bootstrap/Button';
 
 const Login = (props) => {
@@ -14,6 +15,8 @@ const Login = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const autContext = useContext(AutContext).url;
 
     useEffect(() => {
         axios.get(imageContext)
@@ -32,9 +35,10 @@ const Login = (props) => {
             returnSecureToken: true
         }
 
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAz2len4LT2BmdNFZEQqzUF1j3hB-xtUsw', authData)
+        axios.post(autContext, authData)
             .then((response) => {
                 props.actualizarLogin(true, response.data);
+                alert('El usuario ha iniciado sesión.');
             })
             .catch((error) => {
                 alert('El usuario o contraseña no son correctos.');
