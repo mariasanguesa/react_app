@@ -8,7 +8,7 @@ const Carrito = (props) => {
 
     let contenido = <></>;
     
-    if (props.idToken) {
+    if (props.loginData.idToken) {
         contenido = <Container className="gap-3">
             <Row className="justify-content-md-center  mx-auto" >
                 <Col md={7}>
@@ -17,7 +17,7 @@ const Carrito = (props) => {
                     </div>
                     <div >
                         
-                        <ProductosCarrito idToken={props.idToken} />
+                        <ProductosCarrito loginData={props.loginData} />
                     </div>
                 </Col>
                 <Col md={3}>

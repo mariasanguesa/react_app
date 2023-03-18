@@ -15,7 +15,6 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
     useEffect(() => {
         axios.get(imageContext)
             .then((response) => {
@@ -42,14 +41,14 @@ const Login = (props) => {
                 alert('No se ha encontrado el usuario');
             })
 
-
+            setEmail('');
+            setPassword('');
     }
 
     const logoutHandler = () => {
 
         props.actualizarLogin(false, {});
     }
-
 
     return (
         <>

@@ -12,6 +12,7 @@ import AutContext from './store/AutContext'
 
 function App() {
 
+
   const [urlImage, setUrlImage] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/imagenes.json');
   const [urlCart, setUrlCart] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito.json');
 
@@ -24,14 +25,16 @@ function App() {
     setLoginData(loginData);
     localStorage.setItem('login', login);
     localStorage.setItem('loginData', loginData.idToken);
+    localStorage.setItem('loginEmail',loginData.email);
   }
 
   useEffect(() => {
     if (localStorage.getItem('login') === 'true') {
       setLogin(true);
-      setLoginData({idToken:localStorage.getItem('loginData')});
+      setLoginData({idToken:localStorage.getItem('loginData'),email:localStorage.getItem('loginEmail')});
     }
   }, []);
+  
 
   return (
     <div>
@@ -41,7 +44,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/carrito" element={<Carrito idToken={loginData.idToken}/>}></Route>
+        <Route path="/carrito" element={<Carrito loginData={loginData}/>}></Route>
         <Route path="/tienda" element={<Tienda />}></Route>
         <Route path="/login" element={<Login actualizarLogin={actualizarLogin}/>}></Route>
         <Route path="*" element={<ErrorPage />} />

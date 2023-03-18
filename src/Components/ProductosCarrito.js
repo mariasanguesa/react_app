@@ -16,10 +16,16 @@ const ProductosCarrito = (props) => {
                     arrayCarrito.push({
                         id: id,
                         email: response.data[id].email,
-                        comprados: response.data[id].productos,
+                        comprados: response.data[id].comprados,
                     })
                 }
-                setProductos(arrayCarrito);
+                let copiaProductos = [...arrayCarrito];
+                copiaProductos = copiaProductos.filter((elemento) => {
+                    // Si se cumple condición lo deja en el array
+                    return elemento.email === props.loginData.email;
+                })
+
+                setProductos(copiaProductos);
             }
 
             ).catch(
@@ -34,7 +40,6 @@ const ProductosCarrito = (props) => {
     if (productos.length > 0) {
         contenido = <div>
             {productos[0].comprados.map((elemento) => {
-                console.log(elemento)
                 return (
                     <ProductoCarrito key={elemento.idProducto} producto={elemento} />
                 )
