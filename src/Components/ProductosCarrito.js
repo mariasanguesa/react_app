@@ -30,7 +30,7 @@ const ProductosCarrito = (props) => {
 
             ).catch(
                 (error) => {
-                    alert('se ha producido un error');
+                    alert('Se ha producido un error.');
                 }
             )
     }, []);
@@ -46,6 +46,8 @@ const ProductosCarrito = (props) => {
             })}
 
         </div>
+    }else{
+        contenido = "El carrito está vacío";
     }
 
     return (

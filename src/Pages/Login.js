@@ -35,10 +35,9 @@ const Login = (props) => {
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAz2len4LT2BmdNFZEQqzUF1j3hB-xtUsw', authData)
             .then((response) => {
                 props.actualizarLogin(true, response.data);
-                alert('El usuario se ha logueado');
             })
             .catch((error) => {
-                alert('No se ha encontrado el usuario');
+                alert('El usuario o contraseña no son correctos.');
             })
 
             setEmail('');

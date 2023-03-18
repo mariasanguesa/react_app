@@ -3,12 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import ProductosCarrito from "../Components/ProductosCarrito";
+import { useState, useEffect } from 'react';
 
 const Carrito = (props) => {
 
+
     let contenido = <></>;
-    
-    if (props.loginData.idToken) {
+
+    if (props.loginData.idToken)  {
         contenido = <Container className="gap-3">
             <Row className="justify-content-md-center  mx-auto" >
                 <Col md={7}>
@@ -16,7 +18,7 @@ const Carrito = (props) => {
                         <p>Mi carrito</p>
                     </div>
                     <div >
-                        
+
                         <ProductosCarrito loginData={props.loginData} />
                     </div>
                 </Col>
@@ -45,7 +47,8 @@ const Carrito = (props) => {
             </Row>
         </Container>;
 
-    } else {
+    }
+    else {
         contenido = "Para acceder al carrito hace falta hacer login";
 
     }
