@@ -5,8 +5,12 @@ import Button from 'react-bootstrap/Button';
 
 const ProductoCarrito = (props) => {
 
-    const numberHandler = () => {
+    const añadirHandler = () => {
+        props.añadirCarrito(props.producto.idProducto,props.producto.numProducto,"add");
+    }
 
+    const quitarHandler = () => {
+        props.añadirCarrito(props.producto.idProducto,props.producto.numProducto,"sub");
     }
 
     return (
@@ -28,9 +32,9 @@ const ProductoCarrito = (props) => {
                         </Container>
                     </Col>
                     <Col>
-                        <Button size="sm" variant="outline-dark">-</Button>
-                        <input className="border-0 w-25 text-center" value={props.producto.numProducto} onChange={numberHandler}></input>
-                        <Button size="sm" variant="outline-dark">+</Button>
+                        <Button size="sm" variant="outline-dark" onClick={quitarHandler}>-</Button>
+                        <span className="border-0 w-25 text-center"> {props.producto.numProducto} </span>
+                        <Button size="sm" variant="outline-dark" onClick={añadirHandler}>+</Button>
                     </Col>
                     <Col>
                         <Button size="sm" variant="outline-dark">X</Button>

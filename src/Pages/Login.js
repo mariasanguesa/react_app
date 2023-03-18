@@ -43,9 +43,8 @@ const Login = (props) => {
             .catch((error) => {
                 alert('El usuario o contraseña no son correctos.');
             })
-
-            setEmail('');
-            setPassword('');
+        setEmail('');
+        setPassword('');
     }
 
     const logoutHandler = () => {

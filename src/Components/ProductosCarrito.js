@@ -33,7 +33,7 @@ const ProductosCarrito = (props) => {
                     alert('Se ha producido un error.');
                 }
             )
-    }, []);
+    });
 
     let contenido = "";
 
@@ -41,7 +41,7 @@ const ProductosCarrito = (props) => {
         contenido = <div>
             {productos[0].comprados.map((elemento) => {
                 return (
-                    <ProductoCarrito key={elemento.idProducto} producto={elemento} />
+                    <ProductoCarrito añadirCarrito={props.añadirCarrito} key={elemento.idProducto} producto={elemento} />
                 )
             })}
 

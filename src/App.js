@@ -7,8 +7,9 @@ import Tienda from "./Pages/Tienda";
 import Login from "./Pages/Login";
 import DBImageContext from './store/DBImageContext';
 import DBCartContext from './store/DBCartContext';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import AutContext from './store/AutContext'
+import axios from "axios";
 
 function App() {
 
@@ -26,30 +27,66 @@ function App() {
     setLoginData(loginData);
     localStorage.setItem('login', login);
     localStorage.setItem('loginData', loginData.idToken);
-    localStorage.setItem('loginEmail',loginData.email);
+    localStorage.setItem('loginEmail', loginData.email);
   }
 
   useEffect(() => {
     if (localStorage.getItem('login') === 'true') {
       setLogin(true);
-      setLoginData({idToken:localStorage.getItem('loginData'),email:localStorage.getItem('loginEmail')});
+      setLoginData({ idToken: localStorage.getItem('loginData'), email: localStorage.getItem('loginEmail') });
     }
   }, []);
-  
+
+
+  const añadirCarrito = (idProducto, numProducto,operation) => {
+    axios.get(urlCart)
+      .then((response) => {
+        for (let id in response.data) {
+          if (response.data[id].email === loginData.email) {
+            for (let key in response.data[id].comprados) {
+              if (response.data[id].comprados[key].idProducto === idProducto) {
+                let newNumProducto = 0;
+                if(operation==="add"){
+                  newNumProducto = Number(numProducto) + Number(1);
+                }else if(operation==="sub"){
+                  newNumProducto = Number(numProducto) - Number(1);
+                }   
+                axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/'+id+'/comprados/'+key+'/numProducto.json?auth=' + loginData.idToken, newNumProducto)
+                  .then((response) => {
+                  })
+                  .catch((error) => {
+                    alert('No se ha podido actualizar el producto');
+                  })
+
+              }
+            }
+          }
+          else {
+            // Si no tienes un carrito hay que crearlo
+            // Si no estás logueado -> alert
+          }
+        }
+      }
+      ).catch(
+        (error) => {
+          alert('Se ha producido un error.');
+        }
+      )
+  }
 
   return (
     <div>
-      <AutContext.Provider value={{ login: login, url:urlAut}}>
-      <DBImageContext.Provider value={{  url:urlImage }}></DBImageContext.Provider>
-      <DBCartContext.Provider value={{  url:urlCart }}></DBCartContext.Provider>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/carrito" element={<Carrito loginData={loginData}/>}></Route>
-        <Route path="/tienda" element={<Tienda />}></Route>
-        <Route path="/login" element={<Login actualizarLogin={actualizarLogin}/>}></Route>
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <AutContext.Provider value={{ login: login, url: urlAut }}>
+        <DBImageContext.Provider value={{ url: urlImage }}></DBImageContext.Provider>
+        <DBCartContext.Provider value={{ url: urlCart }}></DBCartContext.Provider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/carrito" element={<Carrito loginData={loginData} añadirCarrito={añadirCarrito} />}></Route>
+          <Route path="/tienda" element={<Tienda />}></Route>
+          <Route path="/login" element={<Login actualizarLogin={actualizarLogin} />}></Route>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
       </AutContext.Provider>
     </div>
   );
