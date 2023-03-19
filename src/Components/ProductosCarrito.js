@@ -38,16 +38,24 @@ const ProductosCarrito = (props) => {
     let contenido = "";
 
     if (productos.length > 0) {
-        contenido = <div>
-            {productos[0].comprados.map((elemento) => {
-                return (
-                    <ProductoCarrito añadirCarrito={props.añadirCarrito} key={elemento.idProducto} producto={elemento} />
-                )
-            })}
-
-        </div>
-    }else{
-        contenido = "El carrito está vacío";
+        if (productos[0].comprados) {
+            let arrayComprados = [];
+            for (let num in productos[0].comprados) {
+                if (productos[0].comprados[num]) {
+                    arrayComprados.push({
+                        productos: productos[0].comprados[num],
+                    })
+                }
+                contenido = <div>{
+                    arrayComprados.map((elemento) => {
+                        return (<ProductoCarrito añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito} key={elemento.productos.idProducto} producto={elemento.productos} />)
+                    })
+                }</div>
+            }
+        }
+        else {
+            contenido = "El carrito está vacío";
+        }
     }
 
     return (

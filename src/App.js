@@ -38,7 +38,7 @@ function App() {
   }, []);
 
 
-  const añadirCarrito = (idProducto, numProducto,operation) => {
+  const añadirCarrito = (idProducto, numProducto, operation) => {
     axios.get(urlCart)
       .then((response) => {
         for (let id in response.data) {
@@ -46,12 +46,12 @@ function App() {
             for (let key in response.data[id].comprados) {
               if (response.data[id].comprados[key].idProducto === idProducto) {
                 let newNumProducto = 0;
-                if(operation==="add"){
+                if (operation === "add") {
                   newNumProducto = Number(numProducto) + Number(1);
-                }else if(operation==="sub"){
+                } else if (operation === "sub") {
                   newNumProducto = Number(numProducto) - Number(1);
-                }   
-                axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/'+id+'/comprados/'+key+'/numProducto.json?auth=' + loginData.idToken, newNumProducto)
+                }
+                axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '/numProducto.json?auth=' + loginData.idToken, newNumProducto)
                   .then((response) => {
                   })
                   .catch((error) => {
@@ -74,6 +74,32 @@ function App() {
       )
   }
 
+  const quitarCarrito = (idProducto) => {
+    axios.get(urlCart)
+      .then((response) => {
+        for (let id in response.data) {
+          if (response.data[id].email === loginData.email) {
+            for (let key in response.data[id].comprados) {
+              if (response.data[id].comprados[key].idProducto === idProducto) {
+                axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '.json?auth=' + loginData.idToken)
+                  .then((response) => {
+                  })
+                  .catch((error) => {
+                    alert('No se ha podido actualizar el producto');
+                  })
+              }
+            }
+          }
+        }
+      }
+      ).catch(
+        (error) => {
+          alert('Se ha producido un error.');
+        }
+      )
+  }
+
+
   return (
     <div>
       <AutContext.Provider value={{ login: login, url: urlAut }}>
@@ -82,7 +108,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/carrito" element={<Carrito loginData={loginData} añadirCarrito={añadirCarrito} />}></Route>
+          <Route path="/carrito" element={<Carrito loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
           <Route path="/tienda" element={<Tienda />}></Route>
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} />}></Route>
           <Route path="*" element={<ErrorPage />} />

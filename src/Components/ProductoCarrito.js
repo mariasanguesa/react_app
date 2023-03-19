@@ -13,6 +13,10 @@ const ProductoCarrito = (props) => {
         props.añadirCarrito(props.producto.idProducto,props.producto.numProducto,"sub");
     }
 
+    const eliminarHandler = () => {
+        props.quitarCarrito(props.producto.idProducto);
+    }
+
     return (
         <>
             <Container className="border-bottom">
@@ -37,7 +41,7 @@ const ProductoCarrito = (props) => {
                         <Button size="sm" variant="outline-dark" onClick={añadirHandler}>+</Button>
                     </Col>
                     <Col>
-                        <Button size="sm" variant="outline-dark">X</Button>
+                        <Button size="sm" variant="outline-dark" onClick={eliminarHandler}>X</Button>
 
                     </Col>
                 </Row>

@@ -17,7 +17,7 @@ const Carrito = (props) => {
                         <p>Mi carrito</p>
                     </div>
                     <div >
-                        <ProductosCarrito loginData={props.loginData} añadirCarrito={props.añadirCarrito}/>
+                        <ProductosCarrito loginData={props.loginData} añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito}/>
                     </div>
                 </Col>
                 <Col md={3}>
