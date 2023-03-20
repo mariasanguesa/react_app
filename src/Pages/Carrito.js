@@ -40,7 +40,7 @@ const Carrito = (props) => {
                     </div>
                     <br></br>
                     <div className="text-center align-items-center justify-content-center">
-                        <Button variant="outline-dark"><Link style={{ textDecoration: 'none',color:'black', margin:'10px' }} to="/detallesPedido">Realizar pedido</Link></Button>
+                        <Button variant="outline-dark" as={Link} to="/detallesPedido">Realizar pedido</Button>
                     </div>
                 </Col>
             </Row>

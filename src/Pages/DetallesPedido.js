@@ -7,8 +7,8 @@ const DetallesPedido = () => {
             <h2>Pagina de confirmacion</h2>
             <h3>Detalles de la compra:</h3>
             <div className="text-center align-items-center justify-content-center">
-                <Button variant="outline-dark"><Link style={{ textDecoration: 'none', color: 'black', margin: '10px' }} to="/carrito">Cancelar</Link></Button>
-                <Button variant="outline-dark"><Link style={{ textDecoration: 'none', color: 'black', margin: '10px' }} to="/confirmacionPedido">Continuar</Link></Button>
+                <Button as={Link} variant="outline-dark" to="/carrito">Cancelar</Button>
+                <Button as={Link} variant="outline-dark" to="/confirmacionPedido">Continuar</Button>
             </div>
         </>
     )

@@ -6,7 +6,7 @@ const Agradecimiento = () => {
         <>
             <h2>Gracias!</h2>
             <div className="text-center align-items-center justify-content-center">
-                <Button variant="outline-dark"><Link style={{ textDecoration: 'none', color: 'black', margin: '10px' }} to="/tienda">Realizar nuevo pedido</Link></Button>
+                <Button variant="outline-dark" as={Link} to="/tienda">Realizar nuevo pedido</Button>
             </div>
         </>
     )
