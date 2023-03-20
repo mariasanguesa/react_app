@@ -10,6 +10,7 @@ import DBCartContext from './store/DBCartContext';
 import { useState, useEffect } from 'react';
 import AutContext from './store/AutContext'
 import axios from "axios";
+import MisPedidos from "./Pages/MisPedidos";
 
 function App() {
 
@@ -110,7 +111,8 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/carrito" element={<Carrito loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
           <Route path="/tienda" element={<Tienda />}></Route>
-          <Route path="/login" element={<Login actualizarLogin={actualizarLogin} />}></Route>
+          <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
+          <Route path="login/misPedidos/:id" element={<MisPedidos />}></Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </AutContext.Provider>

@@ -5,7 +5,8 @@ import { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import DBImageContext from '../store/DBImageContext';
 import AutContext from '../store/AutContext';
-import Button from 'react-bootstrap/Button';
+import { Link, useParams, useSearchParams  } from 'react-router-dom';
+import { Button } from "react-bootstrap";
 
 const Login = (props) => {
 
@@ -17,6 +18,8 @@ const Login = (props) => {
     const [password, setPassword] = useState('');
 
     const autContext = useContext(AutContext).url;
+
+    const parametros = useParams();
 
     useEffect(() => {
         axios.get(imageContext)
@@ -52,6 +55,67 @@ const Login = (props) => {
         props.actualizarLogin(false, {});
     }
 
+    let contenidoLogin = "";
+    if (!props.loginData.idToken) {
+        contenidoLogin =
+            <Col className="border-end" md={4} >
+                <div className="Auth-form-container ">
+                    <form onSubmit={submitHandler} className="Auth-form">
+                        <div className="Auth-form-content">
+                            <h3 className="Auth-form-title">Inicia sesión</h3>
+                            <div className="form-group mt-3">
+                                <label>Email</label>
+                                <input
+                                    onChange={(event) => { setEmail(event.target.value) }}
+                                    value={email}
+                                    type="email"
+                                    className="form-control mt-1"
+                                    placeholder="Introducir email"
+                                />
+                            </div>
+                            <div className="form-group mt-3">
+                                <label>Contraseña</label>
+                                <input
+                                    onChange={(event) => { setPassword(event.target.value) }}
+                                    value={password}
+                                    type="password"
+                                    className="form-control mt-1"
+                                    placeholder="Introducir contraseña"
+                                />
+                            </div>
+                            <div className="d-grid gap-2 mt-3">
+                                <button type="submit" className="btn btn-outline-dark">
+                                    Iniciar sesión
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </Col>
+            ;
+    }
+    else {
+        contenidoLogin =
+            <Col>
+                <h3>
+                    ¡Hola, {props.loginData.email}!
+                </h3>
+                <h6>Este es tu perfil de Barras Go.</h6>
+                <br></br>
+                <div>
+                    
+                    <Button variant="btn btn-outline-dark"><Link to={`misPedidos/${props.loginData.email}`}>Ver mis pedidos.</Link></Button>
+                </div>
+                <br></br>
+                <div>
+                    <p>Puedes cerrar sesión haciendo click aquí:</p>
+                    <button onClick={logoutHandler} className="btn btn-outline-dark">
+                        Cerrar sesión
+                    </button>
+                </div>
+            </Col>
+            ;
+    }
     return (
         <>
             <br></br>
@@ -60,43 +124,9 @@ const Login = (props) => {
             <Container className="gap-3">
 
                 <Row className="justify-content-md-center gap-3 mx-auto" >
-                    <Col className="border-end" md={4} >
-                        <div className="Auth-form-container ">
-                            <form onSubmit={submitHandler} className="Auth-form">
-                                <div className="Auth-form-content">
-                                    <h3 className="Auth-form-title">Inicia sesión</h3>
-                                    <div className="form-group mt-3">
-                                        <label>Email</label>
-                                        <input
-                                            onChange={(event) => { setEmail(event.target.value) }}
-                                            value={email}
-                                            type="email"
-                                            className="form-control mt-1"
-                                            placeholder="Introducir email"
-                                        />
-                                    </div>
-                                    <div className="form-group mt-3">
-                                        <label>Contraseña</label>
-                                        <input
-                                            onChange={(event) => { setPassword(event.target.value) }}
-                                            value={password}
-                                            type="password"
-                                            className="form-control mt-1"
-                                            placeholder="Introducir contraseña"
-                                        />
-                                    </div>
-                                    <div className="d-grid gap-2 mt-3">
-                                        <button type="submit" className="btn btn-outline-dark">
-                                            Inciar sesión
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </Col>
-                    <Col>
-                        <Button onClick={logoutHandler} variant="warning" >Logout</Button>
-                    </Col>
+
+                    {contenidoLogin}
+
                     <Col md={4}>
                         <img alt='' style={{ 'width': '500px' }} src={loginDb.login} />
                     </Col>
