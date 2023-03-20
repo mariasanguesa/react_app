@@ -11,6 +11,9 @@ import { useState, useEffect } from 'react';
 import AutContext from './store/AutContext'
 import axios from "axios";
 import MisPedidos from "./Pages/MisPedidos";
+import ConfirmacionPedido from "./Pages/ConfirmacionPedido";
+import DetallesPedido from "./Pages/DetallesPedido";
+import Agradecimiento from "./Pages/Agradecimiento";
 
 function App() {
 
@@ -110,9 +113,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/carrito" element={<Carrito loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
+          <Route path="/detallesPedido" element={<DetallesPedido loginData={loginData}  />}></Route>
+          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData}  />}></Route>
           <Route path="/tienda" element={<Tienda />}></Route>
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
           <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData}/>}></Route>
+          <Route path="/agradecimiento" element={<Agradecimiento loginData={loginData}/>}></Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </AutContext.Provider>

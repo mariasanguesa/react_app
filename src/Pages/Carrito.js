@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import ProductosCarrito from "../Components/ProductosCarrito";
+import { Link } from 'react-router-dom';
 
 const Carrito = (props) => {
 
@@ -39,7 +40,7 @@ const Carrito = (props) => {
                     </div>
                     <br></br>
                     <div className="text-center align-items-center justify-content-center">
-                        <Button variant="dark">Realizar pedido</Button>
+                        <Button variant="outline-dark"><Link style={{ textDecoration: 'none',color:'black', margin:'10px' }} to="/detallesPedido">Realizar pedido</Link></Button>
                     </div>
                 </Col>
             </Row>
@@ -48,7 +49,6 @@ const Carrito = (props) => {
     }
     else {
         contenido = "Para acceder al carrito hace falta hacer login";
-
     }
 
     return (
