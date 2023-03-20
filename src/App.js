@@ -112,7 +112,7 @@ function App() {
           <Route path="/carrito" element={<Carrito loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
           <Route path="/tienda" element={<Tienda />}></Route>
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
-          <Route path="login/misPedidos/:id" element={<MisPedidos />}></Route>
+          <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData}/>}></Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </AutContext.Provider>

@@ -5,7 +5,7 @@ import { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import DBImageContext from '../store/DBImageContext';
 import AutContext from '../store/AutContext';
-import { Link, useParams, useSearchParams  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 
 const Login = (props) => {
@@ -18,8 +18,6 @@ const Login = (props) => {
     const [password, setPassword] = useState('');
 
     const autContext = useContext(AutContext).url;
-
-    const parametros = useParams();
 
     useEffect(() => {
         axios.get(imageContext)
@@ -104,7 +102,7 @@ const Login = (props) => {
                 <br></br>
                 <div>
                     
-                    <Button variant="btn btn-outline-dark"><Link to={`misPedidos/${props.loginData.email}`}>Ver mis pedidos.</Link></Button>
+                    <Button variant="btn btn-outline-dark"><Link style={{ textDecoration: 'none', 'color': 'black', margin:'10px' }} to={`misPedidos/${props.loginData.email}`}>Ver mis pedidos.</Link></Button>
                 </div>
                 <br></br>
                 <div>
