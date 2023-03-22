@@ -6,11 +6,11 @@ import Button from 'react-bootstrap/Button';
 const ProductoCarrito = (props) => {
 
     const añadirHandler = () => {
-        props.añadirCarrito(props.producto.idProducto,props.producto.numProducto,"add");
+        props.añadirCarrito(props.producto.idProducto, props.producto.numProducto, "add");
     }
 
     const quitarHandler = () => {
-        props.añadirCarrito(props.producto.idProducto,props.producto.numProducto,"sub");
+        props.añadirCarrito(props.producto.idProducto, props.producto.numProducto, "sub");
     }
 
     const eliminarHandler = () => {
@@ -22,26 +22,30 @@ const ProductoCarrito = (props) => {
             <Container className="border-bottom">
                 <Row>
                     <Col>
-                        <p>Foto</p>
+                        <img alt='' style={{ 'width': '100px', 'marginTop': '20px' }} src={props.foto} />
                     </Col>
                     <Col>
                         <Container>
                             <Row>
 
-                                <p><b>{props.producto.idProducto}</b></p>
+                                <p><b>{props.nombre}</b></p>
                             </Row>
                             <Row>
-                                <p>Precio</p>
+                                <p>{props.precio}</p>
                             </Row>
                         </Container>
                     </Col>
                     <Col>
-                        <Button size="sm" variant="outline-dark" onClick={quitarHandler}>-</Button>
-                        <span className="border-0 w-25 text-center"> {props.producto.numProducto} </span>
-                        <Button size="sm" variant="outline-dark" onClick={añadirHandler}>+</Button>
+                        <div style={{ 'marginTop': '20px' }}>
+                            <Button size="sm" variant="outline-dark" onClick={quitarHandler}>-</Button>
+                            <span className="border-0 w-25 text-center"> {props.producto.numProducto} </span>
+                            <Button size="sm" variant="outline-dark" onClick={añadirHandler}>+</Button>
+                        </div>
                     </Col>
                     <Col>
-                        <Button size="sm" variant="outline-dark" onClick={eliminarHandler}>X</Button>
+                        <div style={{ 'marginTop': '20px' }}>
+                            <Button size="sm" variant="outline-dark" onClick={eliminarHandler}>X</Button>
+                        </div>
 
                     </Col>
                 </Row>

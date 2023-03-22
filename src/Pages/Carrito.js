@@ -4,8 +4,11 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import ProductosCarrito from "../Components/ProductosCarrito";
 import { Link } from 'react-router-dom';
+import TotalPedido from "../Components/TotalPedido";
+
 
 const Carrito = (props) => {
+
 
 
     let contenido = <></>;
@@ -15,7 +18,7 @@ const Carrito = (props) => {
             <Row className="justify-content-md-center  mx-auto" >
                 <Col md={7}>
                     <div className="border-bottom">
-                        <p>Mi carrito</p>
+                        <p><b>Mi carrito</b></p>
                     </div>
                     <div >
                         <ProductosCarrito loginData={props.loginData} añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito}/>
@@ -23,22 +26,9 @@ const Carrito = (props) => {
                 </Col>
                 <Col md={3}>
                     <div className="border-bottom">
-                        <p >Resumen del pedido</p>
+                        <p ><b>Resumen del pedido</b></p>
                     </div>
-                    <div className="border-bottom">
-                        <Container>
-                            <Row>
-                                <p>Total del pedido</p>
-                            </Row>
-                            <Row>
-                                <p>Gastos de envío</p>
-                            </Row>
-                        </Container>
-                    </div>
-                    <div className="border-bottom">
-                        <p>Total a pagar</p>
-                    </div>
-                    <br></br>
+                    <TotalPedido/>
                     <div className="text-center align-items-center justify-content-center">
                         <Button variant="outline-dark" as={Link} to="/detallesPedido">Realizar pedido</Button>
                     </div>
