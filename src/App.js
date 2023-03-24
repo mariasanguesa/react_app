@@ -22,11 +22,14 @@ function App() {
   const [urlImage, setUrlImage] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/imagenes.json');
   const [urlCart, setUrlCart] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito.json');
   const [urlAut, setAut] = useState('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAz2len4LT2BmdNFZEQqzUF1j3hB-xtUsw');
-  const [urlProductos, setProductos] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/productos.json');
+  const [urlProductos, setUrlProductos] = useState('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/productos.json');
 
   const [login, setLogin] = useState(false);
   // Para el token
   const [loginData, setLoginData] = useState({});
+
+  const [productos, setProductos] = useState([]);
+  const [productosTienda, setProductosTienda] = useState([])
 
   const actualizarLogin = (login, loginData) => {
     setLogin(login);
@@ -36,11 +39,63 @@ function App() {
     localStorage.setItem('loginEmail', loginData.email);
   }
 
+
+
+
+  const añadirBasesDatos = () => {
+    axios.get(urlCart)
+      .then((response) => {
+        let arrayCarrito = [];
+        for (let id in response.data) {
+          arrayCarrito.push({
+            id: id,
+            email: response.data[id].email,
+            comprados: response.data[id].comprados,
+          })
+        }
+        let copiaProductos = [...arrayCarrito];
+        copiaProductos = copiaProductos.filter((elemento) => {
+          // Si se cumple condición lo deja en el array
+          return elemento.email === loginData.email;
+        })
+
+        setProductos(copiaProductos);
+      }
+
+      ).catch(
+        (error) => {
+          alert('Se ha producido un error.');
+        }
+      )
+
+  }
+
+  añadirBasesDatos();
+
   useEffect(() => {
+    
     if (localStorage.getItem('login') === 'true') {
       setLogin(true);
       setLoginData({ idToken: localStorage.getItem('loginData'), email: localStorage.getItem('loginEmail') });
     }
+    axios.get(urlProductos)
+      .then((response) => {
+        let arrayCarrito2 = [];
+        for (let id in response.data) {
+          arrayCarrito2.push({
+            id: id,
+            foto: response.data[id].src,
+            nombre: response.data[id].nombre,
+            precio: response.data[id].precio,
+          })
+          setProductosTienda(arrayCarrito2);
+        }
+      }
+
+      ).catch(
+        (error) => {
+        }
+      )
   }, []);
 
 
@@ -63,7 +118,7 @@ function App() {
                   .catch((error) => {
                     alert('No se ha podido actualizar el producto');
                   })
-
+                //añadirBasesDatos();
               }
             }
           }
@@ -89,10 +144,12 @@ function App() {
               if (response.data[id].comprados[key].idProducto === idProducto) {
                 axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '.json?auth=' + loginData.idToken)
                   .then((response) => {
+
                   })
                   .catch((error) => {
                     alert('No se ha podido actualizar el producto');
                   })
+                //añadirBasesDatos();
               }
             }
           }
@@ -105,7 +162,6 @@ function App() {
       )
   }
 
-
   return (
     <div>
       <AutContext.Provider value={{ login: login, url: urlAut }}>
@@ -115,13 +171,13 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/carrito" element={<Carrito loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
-          <Route path="/detallesPedido" element={<DetallesPedido loginData={loginData}  />}></Route>
-          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData}  />}></Route>
+          <Route path="/carrito" element={<Carrito productos={productos} productosTienda={productosTienda} loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
+          <Route path="/detallesPedido" element={<DetallesPedido productos={productos} productosTienda={productosTienda}  loginData={loginData} />}></Route>
+          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} />}></Route>
           <Route path="/tienda" element={<Tienda />}></Route>
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
-          <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData}/>}></Route>
-          <Route path="/agradecimiento" element={<Agradecimiento loginData={loginData}/>}></Route>
+          <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} />}></Route>
+          <Route path="/agradecimiento" element={<Agradecimiento loginData={loginData} />}></Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </AutContext.Provider>

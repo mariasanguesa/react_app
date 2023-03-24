@@ -3,9 +3,7 @@ import Row from 'react-bootstrap/Row';
 
 const TotalPedido = (props) => {
 
-   
-
-    let contenido = "";
+       let contenido = "";
 
     if (props.productos.length > 0) {
         if (props.productos[0].comprados) {

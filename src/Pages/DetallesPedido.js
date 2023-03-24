@@ -1,12 +1,48 @@
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import Col from "react-bootstrap/esm/Col";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import TotalPedido from "../Components/TotalPedido";
+import ProductosDetalle from "../Components/ProductosDetalle";
 
-const DetallesPedido = () => {
+const DetallesPedido = (props) => {
+    let contenido = <></>;
+
+    if (props.loginData.idToken) {
+        contenido = <Container className="gap-3">
+            <Row className="justify-content-md-center  mx-auto" >
+                <Col md={7}>
+                    <div className="border-bottom">
+                        <p><b>Mi carrito</b></p>
+                    </div>
+                    <div >
+                        <ProductosDetalle productos={props.productos} productosTienda={props.productosTienda} añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito} />
+                    </div>
+                </Col>
+                <Col md={3}>
+                    <div className="border-bottom">
+                        <p ><b>Resumen del pedido</b></p>
+                    </div>
+                    <TotalPedido productos={props.productos} productosTienda={props.productosTienda} />
+                </Col>
+            </Row>
+        </Container>;
+
+    }
+    else {
+        contenido = "No hay contenido para mostrar";
+    }
+
     return (
         <>
+            <br></br>
+            <br></br>
+            <br></br>
             <h2>Pagina de confirmacion</h2>
             <h3>Detalles de la compra:</h3>
             <div className="text-center align-items-center justify-content-center">
+                {contenido}
                 <Button as={Link} variant="outline-dark" to="/carrito">Cancelar</Button>
                 <Button as={Link} variant="outline-dark" to="/confirmacionPedido">Continuar</Button>
             </div>
