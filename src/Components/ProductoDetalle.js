@@ -1,21 +1,8 @@
 import Col from "react-bootstrap/esm/Col";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
 
 const ProductoDetalle = (props) => {
-
-    const añadirHandler = () => {
-        props.añadirCarrito(props.producto.idProducto, props.producto.numProducto, "add");
-    }
-
-    const quitarHandler = () => {
-        props.añadirCarrito(props.producto.idProducto, props.producto.numProducto, "sub");
-    }
-
-    const eliminarHandler = () => {
-        props.quitarCarrito(props.producto.idProducto);
-    }
 
     return (
         <>
@@ -31,7 +18,7 @@ const ProductoDetalle = (props) => {
                                 <p><b>{props.nombre}</b></p>
                             </Row>
                             <Row>
-                                <p>{props.precio}</p>
+                                <p>{props.precio} €</p>
                             </Row>
                         </Container>
                     </Col>

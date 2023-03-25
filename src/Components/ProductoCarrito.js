@@ -31,7 +31,7 @@ const ProductoCarrito = (props) => {
                                 <p><b>{props.nombre}</b></p>
                             </Row>
                             <Row>
-                                <p>{props.precio}</p>
+                                <p>{props.precio} €</p>
                             </Row>
                         </Container>
                     </Col>

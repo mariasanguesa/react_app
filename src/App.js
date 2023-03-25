@@ -31,8 +31,6 @@ function App() {
   const [productos, setProductos] = useState([]);
   const [productosTienda, setProductosTienda] = useState([]);
 
-  const [cambiar, setCambiar] = useState(false);
-
   const actualizarLogin = (login, loginData) => {
     setLogin(login);
     setLoginData(loginData);
@@ -71,7 +69,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setCambiar(false);
     axios.get(urlCart)
       .then((response) => {
         let arrayCarrito = [];

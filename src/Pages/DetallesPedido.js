@@ -7,14 +7,15 @@ import TotalPedido from "../Components/TotalPedido";
 import ProductosDetalle from "../Components/ProductosDetalle";
 
 const DetallesPedido = (props) => {
-    let contenido = <></>;
+
+    let contenido = "";
 
     if (props.loginData.idToken) {
         contenido = <Container className="gap-3">
             <Row className="justify-content-md-center  mx-auto" >
                 <Col md={7}>
                     <div className="border-bottom">
-                        <p><b>Mi carrito</b></p>
+                        <p><b>Mi pedido</b></p>
                     </div>
                     <div >
                         <ProductosDetalle productos={props.productos} productosTienda={props.productosTienda} añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito} />
@@ -39,10 +40,15 @@ const DetallesPedido = (props) => {
             <br></br>
             <br></br>
             <br></br>
-            <h2>Pagina de confirmacion</h2>
-            <h3>Detalles de la compra:</h3>
+            <div className="text-center align-items-center justify-content-center mb-5">
+                <h4>Página de confirmación del pedido</h4>
+                <p>Aquí están los detalles del pedido que estás a punto de realizar, para seguir con la compra pulse continuar.</p>
+            </div>
             <div className="text-center align-items-center justify-content-center">
                 {contenido}
+
+            </div>
+            <div className="text-center align-items-center justify-content-center mt-4">
                 <Button as={Link} variant="outline-dark" to="/carrito">Cancelar</Button>
                 <Button as={Link} variant="outline-dark" to="/confirmacionPedido">Continuar</Button>
             </div>
