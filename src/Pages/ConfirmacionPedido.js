@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
+import DBCartContext from '../store/DBCartContext';
+import { useEffect, useState, useContext } from 'react';
 
 const ConfirmacionPedido = (props) => {
 
@@ -12,7 +13,15 @@ const ConfirmacionPedido = (props) => {
     const [direccion, setDireccion] = useState('');
     const [poblacion, setPoblacion] = useState('');
 
-    //console.log(props.loginData.idToken);
+    const [urlCart, seturlCart] = useState([]);
+    const urlCartContext = useContext(DBCartContext).url;
+
+    useEffect(() => {
+        axios.get(urlCartContext)
+            .then((response) => {
+                seturlCart(response.data);
+            })
+    }, []);
 
     const submitHandler = () => {
 
@@ -25,14 +34,35 @@ const ConfirmacionPedido = (props) => {
             productos: props.productos[0].comprados
         }
 
-        
         axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/pedidos.json?auth=' + props.loginData.idToken, pedido)
             .then((response) => {
 
             }).catch((event) => {
                 alert('No se ha podido añadir el pedido.');
             })
+
+        // Una vez se añade al pedido se borra del carrito
+        for (let id in urlCart) {
+            if (urlCart[id].email === props.loginData.email) {
+                axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados//.json?auth=' + props.loginData.idToken)
+                    .then((response) => {
+
+                    })
+                    .catch((error) => {
+                        alert('No se ha podido actualizar el producto');
+                    })
+            }
+
+        }
     }
+
+    /*axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados.json?auth=' + loginData.idToken)
+        .then((response) => {
+
+        })
+        .catch((error) => {
+            alert('No se ha podido actualizar el producto');
+        })*/
 
     return (
         <>
