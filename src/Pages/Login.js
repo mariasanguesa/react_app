@@ -101,7 +101,7 @@ const Login = (props) => {
                 <h6>Este es tu perfil de Barras Go.</h6>
                 <br></br>
                 <div>
-                    <Button variant="btn btn-outline-dark" as={Link}to={`misPedidos/${props.loginData.email}`}>Ver mis pedidos.</Button>
+                    <Button variant="btn btn-outline-dark" as={Link}to={`misPedidos/${props.loginData.email}`}>Ver mis pedidos</Button>
                 </div>
                 <br></br>
                 <div>

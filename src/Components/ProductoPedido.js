@@ -2,74 +2,35 @@ import Col from "react-bootstrap/esm/Col";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import Accordion from 'react-bootstrap/Accordion';
+
 
 const ProductoPedido = (props) => {
 
 
     return (
         <>
-            <Accordion.Item eventKey="pedido0">
-                <Accordion.Header>Pedido número 1</Accordion.Header>
-                <Accordion.Body>
-                    <Container>
+            
+                    <Container className="border-bottom mt-2">
                         <Row>
-                            <Col>
-                                <p>Foto</p>
+                            <Col xs={4}>
+                            <img alt='' style={{ 'width': '100px', 'marginTop': '20px' }} src={props.producto.foto} />
                             </Col>
                             <Col>
                                 <Container>
                                     <Row>
 
-                                        <p><b>Nombre</b></p>
+                                        <p><b>{props.producto.nombre}</b></p>
                                     </Row>
                                     <Row>
-                                        <p>Precio</p>
+                                        <p>{props.producto.numProducto} x {props.producto.precio} €</p>
+                                        <p>Coste: {Number(props.producto.numProducto)*Number(props.producto.precio)} €</p>
                                     </Row>
                                 </Container>
                             </Col>
-                            <Col>
-                                <Button size="sm" variant="outline-dark" >Eliminar</Button>
-                            </Col>
+                            
                         </Row>
-                    </Container >
-                    <Container >
-                        <ProgressBar animated now={45} />
-                        <p style={{ textAlign: "center" }}><i>El pedido está en camino</i></p>
                     </Container>
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="pedido1">
-                <Accordion.Header>Pedido número 2</Accordion.Header>
-                <Accordion.Body>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <p>Foto</p>
-                            </Col>
-                            <Col>
-                                <Container>
-                                    <Row>
-
-                                        <p><b>Nombre</b></p>
-                                    </Row>
-                                    <Row>
-                                        <p>Precio</p>
-                                    </Row>
-                                </Container>
-                            </Col>
-                            <Col>
-                                <Button size="sm" variant="outline-dark" >Eliminar</Button>
-                            </Col>
-                        </Row>
-                    </Container >
-                    <Container >
-                        <ProgressBar animated now={45} />
-                        <p style={{ textAlign: "center" }}><i>El pedido está en camino</i></p>
-                    </Container>
-                </Accordion.Body>
-            </Accordion.Item>
+                
         </>
     )
 

@@ -13,18 +13,18 @@ const MisPedidos = (props) => {
     if (props.loginData.idToken) {
         if (props.loginData.email === parametros.id) {
             contenido = <Container className="gap-3">
-                <Row className="justify-content-md-center  mx-auto" >
+                <Row className="justify-content-md-center  " >
                     <Col md={7}>
                         <div className="border-bottom">
-                            <p>Mis pedidos realizados</p>
+                            <h6>Mis pedidos realizados</h6>
                         </div>
                         <div >
-                            <ProductosPedido loginData={props.loginData} quitarPedido={props.quitarPedido} />
+                            <ProductosPedido productosTienda={props.productosTienda} loginData={props.loginData} quitarPedido={props.quitarPedido} />
                         </div>
                     </Col>
                 </Row>
             </Container>;
-        }else{
+        } else {
             contenido = "El parámetro dado en la url no se corresponde con el usuario logueado";
         }
 
@@ -36,11 +36,14 @@ const MisPedidos = (props) => {
 
     return (
         <>
-            <br></br>
-            <br></br>
-            <br></br>
+            <div className="text-center align-items-center justify-content-center mt-5 mb-5">
+                <h4>Mis pedidos</h4>
+                <p>Este es tu listado de pedidos. Pincha en cada uno para ver su ficha completa.</p>
+            </div>
+            <div className="text-center align-items-center justify-content-center">
+                {contenido}
 
-            {contenido}
+            </div>
 
         </>
     )

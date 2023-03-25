@@ -176,7 +176,7 @@ function App() {
           <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} productos={productos}/>}></Route>
           {/* <Route path="/tienda" element={<Tienda />}></Route> */}
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
-          <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} />}></Route>
+          <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} productosTienda={productosTienda}/>}></Route>
           <Route path="/agradecimiento" element={<Agradecimiento loginData={loginData} />}></Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>

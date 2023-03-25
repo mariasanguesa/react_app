@@ -44,25 +44,16 @@ const ConfirmacionPedido = (props) => {
         // Una vez se añade al pedido se borra del carrito
         for (let id in urlCart) {
             if (urlCart[id].email === props.loginData.email) {
-                axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados//.json?auth=' + props.loginData.idToken)
-                    .then((response) => {
+            axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados//.json?auth=' + props.loginData.idToken)
+                .then((response) => {
 
-                    })
-                    .catch((error) => {
-                        alert('No se ha podido actualizar el producto');
-                    })
+                })
+                .catch((error) => {
+                    alert('No se ha podido actualizar el producto');
+                })
             }
-
         }
     }
-
-    /*axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados.json?auth=' + loginData.idToken)
-        .then((response) => {
-
-        })
-        .catch((error) => {
-            alert('No se ha podido actualizar el producto');
-        })*/
 
     return (
         <>
