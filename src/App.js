@@ -29,7 +29,9 @@ function App() {
   const [loginData, setLoginData] = useState({});
 
   const [productos, setProductos] = useState([]);
-  const [productosTienda, setProductosTienda] = useState([])
+  const [productosTienda, setProductosTienda] = useState([]);
+
+  const [cambiar, setCambiar] = useState(false);
 
   const actualizarLogin = (login, loginData) => {
     setLogin(login);
@@ -39,10 +41,37 @@ function App() {
     localStorage.setItem('loginEmail', loginData.email);
   }
 
+  useEffect(() => {
 
+    if (localStorage.getItem('login') === 'true') {
+      setLogin(true);
+      setLoginData({ idToken: localStorage.getItem('loginData'), email: localStorage.getItem('loginEmail') });
+    }
+  }, []);
 
+  useEffect(() => {
+    axios.get(urlProductos)
+      .then((response) => {
+        let arrayCarrito2 = [];
+        for (let id in response.data) {
+          arrayCarrito2.push({
+            id: id,
+            foto: response.data[id].src,
+            nombre: response.data[id].nombre,
+            precio: response.data[id].precio,
+          })
+          setProductosTienda(arrayCarrito2);
+        }
+      }
 
-  const añadirBasesDatos = () => {
+      ).catch(
+        (error) => {
+        }
+      )
+  }, []);
+
+  useEffect(() => {
+    setCambiar(false);
     axios.get(urlCart)
       .then((response) => {
         let arrayCarrito = [];
@@ -67,58 +96,37 @@ function App() {
           alert('Se ha producido un error.');
         }
       )
-
-  }
-
-  añadirBasesDatos();
-
-  useEffect(() => {
-    
-    if (localStorage.getItem('login') === 'true') {
-      setLogin(true);
-      setLoginData({ idToken: localStorage.getItem('loginData'), email: localStorage.getItem('loginEmail') });
-    }
-    axios.get(urlProductos)
-      .then((response) => {
-        let arrayCarrito2 = [];
-        for (let id in response.data) {
-          arrayCarrito2.push({
-            id: id,
-            foto: response.data[id].src,
-            nombre: response.data[id].nombre,
-            precio: response.data[id].precio,
-          })
-          setProductosTienda(arrayCarrito2);
-        }
-      }
-
-      ).catch(
-        (error) => {
-        }
-      )
-  }, []);
+  });
 
 
   const añadirCarrito = (idProducto, numProducto, operation) => {
     axios.get(urlCart)
       .then((response) => {
         for (let id in response.data) {
+
           if (response.data[id].email === loginData.email) {
+
             for (let key in response.data[id].comprados) {
-              if (response.data[id].comprados[key].idProducto === idProducto) {
-                let newNumProducto = 0;
-                if (operation === "add") {
-                  newNumProducto = Number(numProducto) + Number(1);
-                } else if (operation === "sub") {
-                  newNumProducto = Number(numProducto) - Number(1);
+
+              if (response.data[id].comprados[key]) {
+                console.log(key);
+
+
+                if (response.data[id].comprados[key].idProducto === idProducto) {
+
+                  let newNumProducto = 0;
+                  if (operation === "add") {
+                    newNumProducto = Number(numProducto) + Number(1);
+                  } else if (operation === "sub") {
+                    newNumProducto = Number(numProducto) - Number(1);
+                  }
+                  axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '/numProducto.json?auth=' + loginData.idToken, newNumProducto)
+                    .then((response) => {
+                    })
+                    .catch((error) => {
+                      alert('No se ha podido actualizar el producto base de datos');
+                    })
                 }
-                axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '/numProducto.json?auth=' + loginData.idToken, newNumProducto)
-                  .then((response) => {
-                  })
-                  .catch((error) => {
-                    alert('No se ha podido actualizar el producto');
-                  })
-                //añadirBasesDatos();
               }
             }
           }
@@ -149,7 +157,7 @@ function App() {
                   .catch((error) => {
                     alert('No se ha podido actualizar el producto');
                   })
-                //añadirBasesDatos();
+
               }
             }
           }
@@ -170,11 +178,11 @@ function App() {
         <DBProductosContext.Provider value={{ url: urlProductos }}></DBProductosContext.Provider>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          {/* <Route path="/" element={<Home />}></Route> */}
           <Route path="/carrito" element={<Carrito productos={productos} productosTienda={productosTienda} loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
-          <Route path="/detallesPedido" element={<DetallesPedido productos={productos} productosTienda={productosTienda}  loginData={loginData} />}></Route>
+          <Route path="/detallesPedido" element={<DetallesPedido productos={productos} productosTienda={productosTienda} loginData={loginData} />}></Route>
           <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} />}></Route>
-          <Route path="/tienda" element={<Tienda />}></Route>
+          {/* <Route path="/tienda" element={<Tienda />}></Route> */}
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
           <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} />}></Route>
           <Route path="/agradecimiento" element={<Agradecimiento loginData={loginData} />}></Route>
