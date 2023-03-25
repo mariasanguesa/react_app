@@ -103,17 +103,10 @@ function App() {
     axios.get(urlCart)
       .then((response) => {
         for (let id in response.data) {
-
           if (response.data[id].email === loginData.email) {
-
             for (let key in response.data[id].comprados) {
-
               if (response.data[id].comprados[key]) {
-                console.log(key);
-
-
                 if (response.data[id].comprados[key].idProducto === idProducto) {
-
                   let newNumProducto = 0;
                   if (operation === "add") {
                     newNumProducto = Number(numProducto) + Number(1);
@@ -149,14 +142,16 @@ function App() {
         for (let id in response.data) {
           if (response.data[id].email === loginData.email) {
             for (let key in response.data[id].comprados) {
-              if (response.data[id].comprados[key].idProducto === idProducto) {
-                axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '.json?auth=' + loginData.idToken)
-                  .then((response) => {
+              if (response.data[id].comprados[key]) {
+                if (response.data[id].comprados[key].idProducto === idProducto) {
+                  axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '.json?auth=' + loginData.idToken)
+                    .then((response) => {
 
-                  })
-                  .catch((error) => {
-                    alert('No se ha podido actualizar el producto');
-                  })
+                    })
+                    .catch((error) => {
+                      alert('No se ha podido actualizar el producto');
+                    })
+                }
 
               }
             }
