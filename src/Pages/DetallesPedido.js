@@ -37,10 +37,7 @@ const DetallesPedido = (props) => {
 
     return (
         <>
-            <br></br>
-            <br></br>
-            <br></br>
-            <div className="text-center align-items-center justify-content-center mb-5">
+            <div className="text-center align-items-center justify-content-center mt-5 mb-5">
                 <h4>Página de confirmación del pedido</h4>
                 <p>Aquí están los detalles del pedido que estás a punto de realizar, para seguir con la compra pulse continuar.</p>
             </div>

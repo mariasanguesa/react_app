@@ -18,14 +18,14 @@ const Carrito = (props) => {
                         <p><b>Mi carrito</b></p>
                     </div>
                     <div >
-                        <ProductosCarrito  productos={props.productos} productosTienda={props.productosTienda} añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito} />
+                        <ProductosCarrito productos={props.productos} productosTienda={props.productosTienda} añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito} />
                     </div>
                 </Col>
                 <Col md={3}>
                     <div className="border-bottom">
                         <p ><b>Resumen del pedido</b></p>
                     </div>
-                    <TotalPedido  productos={props.productos} productosTienda={props.productosTienda} />
+                    <TotalPedido productos={props.productos} productosTienda={props.productosTienda} />
 
                     <div className="text-center align-items-center justify-content-center">
                         <Button variant="outline-dark" as={Link} to="/detallesPedido">Realizar pedido</Button>
@@ -41,11 +41,10 @@ const Carrito = (props) => {
 
     return (
         <>
-            <br></br>
-            <br></br>
-            <br></br>
+            <div className="mt-5">
+                {contenido}
+            </div>
 
-            {contenido}
 
         </>
     )

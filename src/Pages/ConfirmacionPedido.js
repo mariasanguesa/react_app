@@ -3,29 +3,49 @@ import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
+import axios from 'axios';
 
-const ConfirmacionPedido = () => {
+const ConfirmacionPedido = (props) => {
 
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [direccion, setDireccion] = useState('');
     const [poblacion, setPoblacion] = useState('');
 
+    //console.log(props.loginData.idToken);
+
     const submitHandler = () => {
 
-        setNombre('');
-        setDireccion('');
+        const pedido = {
+            nombre: nombre,
+            apellidos: apellidos,
+            direccion: direccion,
+            poblacion: poblacion,
+            email: props.loginData.email,
+            productos: props.productos[0].comprados
+        }
+
+        
+        axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/pedidos.json?auth=' + props.loginData.idToken, pedido)
+            .then((response) => {
+
+            }).catch((event) => {
+                alert('No se ha podido añadir el pedido.');
+            })
     }
 
     return (
         <>
-            <Container>
+            <Container className="justify-content-md-center">
                 <Col>
-                    <h2>Rellena tus datos para la confirmación del pedido</h2>
+                    <div className="text-center align-items-center justify-content-center mt-5 mb-5">
+                        <h4>Página de confirmación del pedido</h4>
+                        <p>Rellena este formulario con tus datos para poder continuar con el envío y confirmar el pedido.</p>
+                    </div>
                     <div className="Auth-form-container ">
                         <form className="Auth-form">
                             <div className="Auth-form-content">
-                                <h3 className="Auth-form-title">Formulario de envío</h3>
+                                <h5 className="Auth-form-title">Formulario de envío</h5>
                                 <div className="form-group mt-3">
                                     <label>Nombre</label>
                                     <input
@@ -53,7 +73,7 @@ const ConfirmacionPedido = () => {
                                         value={direccion}
                                         type="input"
                                         className="form-control mt-1"
-                                        placeholder="Introducir direccion"
+                                        placeholder="Introducir dirección"
                                     />
                                 </div>
                                 <div className="form-group mt-3">
@@ -63,7 +83,7 @@ const ConfirmacionPedido = () => {
                                         value={poblacion}
                                         type="input"
                                         className="form-control mt-1"
-                                        placeholder="Introducir poblacion"
+                                        placeholder="Introducir población"
                                     />
                                 </div>
                                 <div className="d-grid gap-2 mt-3">

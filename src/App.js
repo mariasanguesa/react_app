@@ -173,7 +173,7 @@ function App() {
           {/* <Route path="/" element={<Home />}></Route> */}
           <Route path="/carrito" element={<Carrito productos={productos} productosTienda={productosTienda} loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
           <Route path="/detallesPedido" element={<DetallesPedido productos={productos} productosTienda={productosTienda} loginData={loginData} />}></Route>
-          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} />}></Route>
+          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} productos={productos}/>}></Route>
           {/* <Route path="/tienda" element={<Tienda />}></Route> */}
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
           <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} />}></Route>
