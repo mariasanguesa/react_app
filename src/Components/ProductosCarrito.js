@@ -1,21 +1,29 @@
 import ProductoCarrito from '../Components/ProductoCarrito';
+import { useEffect, useState } from 'react';
 
 const ProductosCarrito = (props) => {
 
-
+    const [productos, setProductos] = useState([]);
 
     let contenido = "";
 
     let arrayComprados = [];
 
     if (props.productos.length > 0) {
-        if (props.productos[0].comprados) {
-            for (let num in props.productos[0].comprados) {
-                if (props.productos[0].comprados[num]) {
+
+        let copiaProductos = props.productos;
+        copiaProductos = copiaProductos.filter((elemento) => {
+            // Si se cumple condición lo deja en el array
+            return elemento.email === props.loginData.email;
+        })
+
+        if (copiaProductos[0].comprados) {
+            for (let num in copiaProductos[0].comprados) {
+                if (copiaProductos[0].comprados[num]) {
                     for (let y in props.productosTienda) {
-                        if (props.productosTienda[y].id === props.productos[0].comprados[num].idProducto) {
+                        if (props.productosTienda[y].id === copiaProductos[0].comprados[num].idProducto) {
                             arrayComprados.push({
-                                productos: props.productos[0].comprados[num],
+                                productos: copiaProductos[0].comprados[num],
                                 nombre: props.productosTienda[y].nombre,
                                 precio: props.productosTienda[y].precio,
                                 foto: props.productosTienda[y].foto
