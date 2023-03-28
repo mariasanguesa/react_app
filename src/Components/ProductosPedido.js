@@ -38,7 +38,6 @@ const ProductosPedido = (props) => {
     let contenido = [];
 
     for (let x in productos) {
-
         if (productos[x]) {
             if (productos[x].comprados) {
                 let arrayComprados = [];

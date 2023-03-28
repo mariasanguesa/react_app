@@ -1,31 +1,28 @@
 import React from "react";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { Button } from "react-bootstrap";
-import img2 from "../images/barra2.png";
 
 const ProductoHome = (props) => {
 
+    const añadirHandler = () => {
+        props.añadirCarrito(props.producto, 1, "new");
+    }
+
     return (
         <>
-           
-                <Row>
-                <Col md={3} >
-                    <Card style={{marginTop:"5px"}}>
-                        <Card.Img variant="top" src={img2} className="img-fluid"/>
+                <Col md={4} >
+                    <Card style={{marginTop:"5px", marginBottom:"5px"}}>
+                        <Card.Img variant="top" src={props.foto} className="img-fluid"/>
                         <Card.Body>
-                            <Card.Title style={{textAlign:"center"}}>Pack Barras Tropical</Card.Title>
-                            <Card.Text style={{textAlign:"center"}}>
-                                    300$
+                            <Card.Title style={{textAlign:"center", fontWeight:"bold"}}>{props.nombre}</Card.Title>
+                            <Card.Text style={{textAlign:"center", fontWeight:"500"}}>
+                            {props.precio + '$'}
                             </Card.Text>
-                            <Button variant="primary" style={{marginLeft:"45px"}}>Añadir al carrito</Button>
+                            <Button variant="dark" style={{marginLeft:"85px"}} onClick={añadirHandler}>Añadir al carrito</Button>
                         </Card.Body>
                     </Card>
                 </Col>
-                </Row>
-            
         </>
     )
 

@@ -119,6 +119,20 @@ function App() {
                 }
               }
             }
+            if (operation === "new") {
+              const newProducto = {
+                idProducto: idProducto,
+                numProducto: numProducto
+              };
+              axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados.json?auth=' + loginData.idToken, newProducto)
+                .then((response) => {
+                  alert('Se ha añadido correctamente al carrito')
+                })
+                .catch((error) => {
+                  console.log(error);
+                  alert(error);
+                })
+            }
           }
           else {
             // Si no tienes un carrito hay que crearlo
@@ -170,13 +184,13 @@ function App() {
         <DBProductosContext.Provider value={{ url: urlProductos }}></DBProductosContext.Provider>
         <Header />
         <Routes>
-          {/* <Route path="/" element={<Home />}></Route> */}
+          <Route path="/" element={<Home />}></Route>
           <Route path="/carrito" element={<Carrito productos={productos} productosTienda={productosTienda} loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
           <Route path="/detallesPedido" element={<DetallesPedido productos={productos} productosTienda={productosTienda} loginData={loginData} />}></Route>
-          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} productos={productos}/>}></Route>
-          {/* <Route path="/tienda" element={<Tienda />}></Route> */}
+          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} productos={productos} />}></Route>
+          <Route path="/tienda" element={<Tienda />}></Route>
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
-          <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} productosTienda={productosTienda}/>}></Route>
+          <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} productosTienda={productosTienda} />}></Route>
           <Route path="/agradecimiento" element={<Agradecimiento loginData={loginData} />}></Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>

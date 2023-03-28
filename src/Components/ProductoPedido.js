@@ -1,8 +1,6 @@
 import Col from "react-bootstrap/esm/Col";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-
 
 const ProductoPedido = (props) => {
 
