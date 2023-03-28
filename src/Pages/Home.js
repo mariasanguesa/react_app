@@ -43,11 +43,11 @@ const Home = (props) => {
           <Container>
             <Row style={{marginTop:"10px"}}>
               <Col style={{backgroundColor:"#92f3b4", marginLeft:"80px" , justifyContent:"right"}}>
-                <p>
+                
                 <h1 style={{fontWeight:"bold",marginTop:"80px"}}>COME BIEN</h1>
                    <h1 style={{fontWeight:"bold"}}>VIVE BIEN</h1>
                    <Button variant="outline-dark" style={{marginTop:"20px"}}>Añadir al carrito</Button>
-                </p>
+                
               </Col>
               <Col>
                 <Image src={img3} style={{marginLeft:"200px"}}/> 

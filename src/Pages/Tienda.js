@@ -11,7 +11,7 @@ const Tienda = (props) => {
             contenido = <Row>{
                 Object.values(props.productosTienda).map((elemento) => {
                     return (
-                        <ProductoHome key={elemento.nombre} nombre={elemento.nombre} foto={elemento.foto} precio={elemento.precio} producto={elemento.id} añadirCarrito={props.añadirCarrito} />
+                        <ProductoHome loginData={props.loginData} productos={props.productos} key={elemento.nombre} nombre={elemento.nombre} foto={elemento.foto} precio={elemento.precio} producto={elemento.id} añadirCarrito={props.añadirCarrito} />
                     )
                 })
             }</Row>
