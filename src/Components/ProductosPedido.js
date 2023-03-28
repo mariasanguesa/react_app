@@ -5,6 +5,7 @@ import DBPedidoContext from '../store/DBPedidosContext';
 import axios from 'axios';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';
+import { confirmAlert } from "react-confirm-alert";
 
 const ProductosPedido = (props) => {
 
@@ -35,6 +36,27 @@ const ProductosPedido = (props) => {
             })
     }, []);
 
+    const eliminarHandler = (event) => {
+
+        if (window.confirm('¿Estás seguro de querer eliminar el pedido?')) {
+            axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/pedidos/' + event.target.id + '.json?auth=' + props.loginData.idToken)
+                .then((response) => {
+
+                })
+                .catch((error) => {
+                    alert('No se ha podido eliminar el producto de la base de datos.');
+                })
+            let copiaProductos2 = [...productos];
+            copiaProductos2 = copiaProductos2.filter((elemento) => {
+                // Si se cumple condición lo deja en el array
+                return elemento.id !== event.target.id;
+            })
+            setProductos(copiaProductos2);
+        }
+
+
+    }
+
     let contenido = [];
 
     for (let x in productos) {
@@ -44,10 +66,10 @@ const ProductosPedido = (props) => {
                 let productosPedido = [];
                 let arrayFinal = [];
                 for (let id in productos[x].comprados) {
-
                     for (let key in props.productosTienda) {
                         if (props.productosTienda[key].id === productos[x].comprados[id].idProducto) {
                             productosPedido.push({
+                                id: productos[x].id + productos[x].comprados[id].idProducto,
                                 idProducto: productos[x].comprados[id].idProducto,
                                 numProducto: productos[x].comprados[id].numProducto,
                                 nombre: props.productosTienda[key].nombre,
@@ -72,7 +94,7 @@ const ProductosPedido = (props) => {
                             {
                                 arrayFinal.map((elemento) => {
                                     return (
-                                        <ProductoPedido key={elemento.idProducto} producto={elemento} />
+                                        <ProductoPedido key={elemento.id} producto={elemento} />
                                     )
                                 })
                             }
@@ -82,9 +104,7 @@ const ProductosPedido = (props) => {
                                 <ProgressBar animated now={35} />
                                 <p style={{ textAlign: "center" }}><i>El pedido está en camino</i></p>
                             </div>
-                            <Button size="sm" variant="dark" >Eliminar pedido</Button>
-
-
+                            <Button id={productos[x].id} size="sm" variant="dark" onClick={eliminarHandler} >Eliminar pedido</Button>
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
