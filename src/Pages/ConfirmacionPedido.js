@@ -36,7 +36,7 @@ const ConfirmacionPedido = (props) => {
 
         axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/pedidos.json?auth=' + props.loginData.idToken, pedido)
             .then((response) => {
-
+                props.establecerProductos();
             }).catch((event) => {
                 alert('No se ha podido añadir el pedido.');
             })

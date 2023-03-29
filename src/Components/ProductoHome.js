@@ -16,20 +16,20 @@ const ProductoHome = (props) => {
         if (copiaProductos[0].comprados) {
             let arrayComprados = [];
             Object.values(copiaProductos[0].comprados).map((elemento) => {
-                arrayComprados.push(elemento.idProducto);
+                return (arrayComprados.push(elemento.idProducto))
             })
-            
-            if(arrayComprados.includes(props.producto)){
+
+            if (arrayComprados.includes(props.producto)) {
                 for (let i in copiaProductos[0].comprados) {
                     if (copiaProductos[0].comprados[i].idProducto === props.producto) {
                         props.añadirCarrito(props.producto, copiaProductos[0].comprados[i].numProducto, "add");
                     }
                 }
-            }else{
-                props.añadirCarrito(props.producto,-1, "add");
+            } else {
+                props.añadirCarrito(props.producto, -1, "add");
 
-            }  
-            
+            }
+
         } else {
 
             props.añadirCarrito(props.producto, 0, "add");
@@ -46,9 +46,12 @@ const ProductoHome = (props) => {
                     <Card.Body>
                         <Card.Title style={{ textAlign: "center", fontWeight: "bold" }}>{props.nombre}</Card.Title>
                         <Card.Text style={{ textAlign: "center", fontWeight: "500" }}>
-                            {props.precio + '$'}
+                            {props.precio + ' €'}
                         </Card.Text>
-                        <Button variant="dark" style={{ marginLeft: "85px" }} onClick={añadirHandler}>Añadir al carrito</Button>
+                        <div className="text-center align-items-center justify-content-center">
+                            <Button variant="dark" onClick={añadirHandler}>Añadir al carrito</Button>
+                        </div>
+
                     </Card.Body>
                 </Card>
             </Col>

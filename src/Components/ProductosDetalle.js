@@ -24,7 +24,7 @@ const ProductosDetalle= (props) => {
                 }
                 contenido = <div>{
                     arrayComprados.map((elemento) => {
-                        return (<ProductoDetalle añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito} key={elemento.productos.idProducto} producto={elemento.productos} nombre={elemento.nombre} foto={elemento.foto} precio={elemento.precio} />)
+                        return (<ProductoDetalle key={elemento.productos.idProducto} producto={elemento.productos} nombre={elemento.nombre} foto={elemento.foto} precio={elemento.precio} />)
                     })
                 }</div>
             }

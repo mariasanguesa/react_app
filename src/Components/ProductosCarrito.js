@@ -1,9 +1,6 @@
 import ProductoCarrito from '../Components/ProductoCarrito';
-import { useEffect, useState } from 'react';
 
 const ProductosCarrito = (props) => {
-
-    const [productos, setProductos] = useState([]);
 
     let contenido = "";
 
