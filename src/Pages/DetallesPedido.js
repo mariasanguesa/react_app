@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import TotalPedido from "../Components/TotalPedido";
 import ProductosDetalle from "../Components/ProductosDetalle";
+import React from 'react';
 
 const DetallesPedido = (props) => {
 

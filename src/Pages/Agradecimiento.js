@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import DBImageContext from '../store/DBImageContext';
 import { useEffect, useState, useContext } from 'react';
 import axios from "axios";
+import React from 'react';
 
 const Agradecimiento = () => {
 

@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.flying{
+  background-color:red
+}

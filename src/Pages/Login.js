@@ -7,6 +7,7 @@ import DBImageContext from '../store/DBImageContext';
 import AutContext from '../store/AutContext';
 import { Link } from 'react-router-dom';
 import { Button } from "react-bootstrap";
+import React from 'react';
 
 const Login = (props) => {
 
@@ -94,7 +95,7 @@ const Login = (props) => {
     }
     else {
         contenidoLogin =
-            <Col>
+            <Col className="border-end" md={4} >
                 <h3>
                     ¡Hola, {props.loginData.email}!
                 </h3>

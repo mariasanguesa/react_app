@@ -5,6 +5,7 @@ import DBPedidoContext from '../store/DBPedidosContext';
 import axios from 'axios';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';
+import React from 'react';
 
 const ProductosPedido = (props) => {
 

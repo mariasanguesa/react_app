@@ -7,7 +7,6 @@ import img3 from "../images/slide3.png";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-
 const Home = (props) => {
     return (
         <Carousel fade>

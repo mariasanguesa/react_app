@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import ProductosPedido from "../Components/ProductosPedido";
 import { useParams } from "react-router-dom";
+import React from 'react';
 
 const MisPedidos = (props) => {
 

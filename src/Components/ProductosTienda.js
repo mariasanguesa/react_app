@@ -1,6 +1,6 @@
 import React from "react";
 import ProductoHome from "../Components/ProductoHome";
-
+import React from 'react';
 
 const ProductosTienda = (props) => {
 

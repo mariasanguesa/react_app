@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import DBCartContext from '../store/DBCartContext';
 import { useEffect, useState, useContext } from 'react';
+import React from 'react';
 
 const ConfirmacionPedido = (props) => {
 
@@ -16,6 +17,8 @@ const ConfirmacionPedido = (props) => {
     const [urlCart, seturlCart] = useState([]);
     const urlCartContext = useContext(DBCartContext).url;
 
+    const navega = useNavigate();
+
     useEffect(() => {
         axios.get(urlCartContext)
             .then((response) => {
@@ -24,33 +27,38 @@ const ConfirmacionPedido = (props) => {
     }, []);
 
     const submitHandler = () => {
+        if (!nombre || !apellidos || !direccion || !poblacion) {
+            alert('Para continuar debes rellenar todos los campos.');
+        } else {
+            // Enviar a la página de agradecimiento
+            navega('/agradecimiento');
+            const pedido = {
+                nombre: nombre,
+                apellidos: apellidos,
+                direccion: direccion,
+                poblacion: poblacion,
+                email: props.loginData.email,
+                productos: props.productos[0].comprados
+            }
 
-        const pedido = {
-            nombre: nombre,
-            apellidos: apellidos,
-            direccion: direccion,
-            poblacion: poblacion,
-            email: props.loginData.email,
-            productos: props.productos[0].comprados
-        }
-
-        axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/pedidos.json?auth=' + props.loginData.idToken, pedido)
-            .then((response) => {
-                props.establecerProductos();
-            }).catch((event) => {
-                alert('No se ha podido añadir el pedido.');
-            })
-
-        // Una vez se añade al pedido se borra del carrito
-        for (let id in urlCart) {
-            if (urlCart[id].email === props.loginData.email) {
-            axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados//.json?auth=' + props.loginData.idToken)
+            axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/pedidos.json?auth=' + props.loginData.idToken, pedido)
                 .then((response) => {
+                    props.establecerProductos();
+                }).catch((event) => {
+                    alert('No se ha podido añadir el pedido.');
+                })
 
-                })
-                .catch((error) => {
-                    alert('No se ha podido actualizar el producto');
-                })
+            // Una vez se añade al pedido se borra del carrito
+            for (let id in urlCart) {
+                if (urlCart[id].email === props.loginData.email) {
+                    axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados//.json?auth=' + props.loginData.idToken)
+                        .then((response) => {
+
+                        })
+                        .catch((error) => {
+                            alert('No se ha podido actualizar el producto');
+                        })
+                }
             }
         }
     }
@@ -108,7 +116,7 @@ const ConfirmacionPedido = (props) => {
                                     />
                                 </div>
                                 <div className="d-grid gap-2 mt-3">
-                                    <Button as={Link} onClick={submitHandler} to="/agradecimiento" variant="outline-dark" >Confirmar</Button>
+                                    <Button onClick={submitHandler} variant="outline-dark" >Confirmar</Button>
                                 </div>
                             </div>
                         </form>

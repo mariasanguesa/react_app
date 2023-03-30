@@ -2,6 +2,7 @@ import Col from "react-bootstrap/esm/Col";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import React from 'react';
 
 const ProductoCarrito = (props) => {
 

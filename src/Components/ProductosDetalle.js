@@ -1,4 +1,5 @@
 import ProductoDetalle from '../Components/ProductoDetalle';
+import React from 'react';
 
 const ProductosDetalle= (props) => {
 

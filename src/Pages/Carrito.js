@@ -3,12 +3,32 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import ProductosCarrito from "../Components/ProductosCarrito";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import TotalPedido from "../Components/TotalPedido";
+import React from 'react';
 
 const Carrito = (props) => {
 
     let contenido = <></>;
+    const navega = useNavigate();
+
+    const realizarPedido = () =>{
+        if (props.productos.length > 0) {
+
+            let copiaProductos = props.productos;
+            copiaProductos = copiaProductos.filter((elemento) => {
+                // Si se cumple condición lo deja en el array
+                return elemento.email === props.loginData.email;
+            })
+    
+            if (copiaProductos[0].comprados) {
+                navega("/detallesPedido");
+            }
+            else{
+                alert('No puedes continuar: el carrito está vacío.');
+            }
+        }
+    }
 
     if (props.loginData.idToken) {
         contenido = <Container className="gap-3">
@@ -28,7 +48,7 @@ const Carrito = (props) => {
                     <TotalPedido productos={props.productos} productosTienda={props.productosTienda} />
 
                     <div className="text-center align-items-center justify-content-center">
-                        <Button variant="outline-dark" as={Link} to="/detallesPedido">Realizar pedido</Button>
+                        <Button variant="outline-dark" onClick={realizarPedido}>Realizar pedido</Button>
                     </div>
                 </Col>
             </Row>

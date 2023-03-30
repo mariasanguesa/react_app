@@ -15,6 +15,7 @@ import ConfirmacionPedido from "./Pages/ConfirmacionPedido";
 import DetallesPedido from "./Pages/DetallesPedido";
 import Agradecimiento from "./Pages/Agradecimiento";
 import DBProductosContext from './store/DBProductosContext';
+import React from 'react';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
     localStorage.setItem('loginEmail', loginData.email);
   }
 
+  // Función para obtener el estado del array que almancena los productos de cada carrito.
   const establecerProductos = () => {
     axios.get(urlCart)
       .then((response) => {
@@ -96,44 +98,50 @@ function App() {
   const añadirCarrito = (idProducto, numProducto, operation) => {
     // Hay comprados en el carrito pero no del producto que se acaba de pinchar (-1)
     // No hay comprados en el carrito (0)
-    if (numProducto === -1 || numProducto === 0) {
-      let carritoNuevo = {
-        idProducto: idProducto,
-        numProducto: 1,
+    if (loginData.idToken) {
+      if (numProducto === -1 || numProducto === 0) {
+        let carritoNuevo = {
+          idProducto: idProducto,
+          numProducto: 1,
+        }
+        axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/0/comprados/.json?auth=' + loginData.idToken, carritoNuevo)
+          .then((response) => {
+            establecerProductos();
+            alert('Se ha añadido el producto al carrito.');
+          }).catch((event) => {
+            alert('No se ha podido añadir el producto.');
+          })
       }
-      axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/0/comprados/.json?auth=' + loginData.idToken, carritoNuevo)
-        .then((response) => {
-          establecerProductos();
-        }).catch((event) => {
-          alert('No se ha podido añadir el pedido.');
-        })
-    }
-    for (let id in productos) {
-      if (productos[id].email === loginData.email) {
-        if (productos[id].comprados) {
-          for (let key in productos[id].comprados) {
-            if (productos[id].comprados[key]) {
-              if (productos[id].comprados[key].idProducto === idProducto) {
-                let newNumProducto = 0;
-                if (operation === "add") {
-                  newNumProducto = Number(numProducto) + Number(1);
-                } else if (operation === "sub") {
-                  newNumProducto = Number(numProducto) - Number(1);
+      for (let id in productos) {
+        if (productos[id].email === loginData.email) {
+          if (productos[id].comprados) {
+            for (let key in productos[id].comprados) {
+              if (productos[id].comprados[key]) {
+                if (productos[id].comprados[key].idProducto === idProducto) {
+                  let newNumProducto = 0;
+                  if (operation === "add") {
+                    newNumProducto = Number(numProducto) + Number(1);
+                  } else if (operation === "sub") {
+                    newNumProducto = Number(numProducto) - Number(1);
+                  }
+                  axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '/numProducto.json?auth=' + loginData.idToken, newNumProducto)
+                    .then((response) => {
+                      establecerProductos();
+                    })
+                    .catch((error) => {
+                      alert('No se ha podido actualizar el producto base de datos');
+                    })
                 }
-                axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '/numProducto.json?auth=' + loginData.idToken, newNumProducto)
-                  .then((response) => {
-                    establecerProductos();
-                  })
-                  .catch((error) => {
-                    alert('No se ha podido actualizar el producto base de datos');
-                  })
               }
             }
           }
-        } 
+        }
       }
-    }
 
+    }
+    else {
+      alert('Debes iniciar sesión para añadir productos al carrito.');
+    }
   }
 
   // Funcion para eliminar productos del carrito
@@ -168,7 +176,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/carrito" element={<Carrito productos={productos} productosTienda={productosTienda} loginData={loginData} añadirCarrito={añadirCarrito} quitarCarrito={quitarCarrito} />}></Route>
           <Route path="/detallesPedido" element={<DetallesPedido productos={productos} productosTienda={productosTienda} loginData={loginData} />}></Route>
-          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} productos={productos} establecerProductos={establecerProductos}/>}></Route>
+          <Route path="/confirmacionPedido" element={<ConfirmacionPedido loginData={loginData} productos={productos} establecerProductos={establecerProductos} />}></Route>
           <Route path="/tienda" element={<Tienda loginData={loginData} productos={productos} productosTienda={productosTienda} añadirCarrito={añadirCarrito} />}></Route>
           <Route path="/login" element={<Login actualizarLogin={actualizarLogin} loginData={loginData} />}></Route>
           <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} productosTienda={productosTienda} />}></Route>
