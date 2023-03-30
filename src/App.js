@@ -16,6 +16,7 @@ import DetallesPedido from "./Pages/DetallesPedido";
 import Agradecimiento from "./Pages/Agradecimiento";
 import DBProductosContext from './store/DBProductosContext';
 import React from 'react';
+import Registro from "./Pages/Registro";
 
 function App() {
 
@@ -104,15 +105,28 @@ function App() {
           idProducto: idProducto,
           numProducto: 1,
         }
-        axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/0/comprados/.json?auth=' + loginData.idToken, carritoNuevo)
-          .then((response) => {
-            establecerProductos();
-            alert('Se ha añadido el producto al carrito.');
-          }).catch((event) => {
-            alert('No se ha podido añadir el producto.');
-          })
+        for (let id in productos) {
+          let idem = id;
+          if (productos[id].email === loginData.email) {
+            if (productos[id].id) {
+              idem = productos[id].id;
+            } else {
+              idem = id;
+            }
+            axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + idem + '/comprados/.json?auth=' + loginData.idToken, carritoNuevo)
+              .then((response) => {
+                establecerProductos();
+              }).catch((event) => {
+                alert('No se ha podido añadir el producto.');
+              })
+
+
+          }
+        }
       }
+
       for (let id in productos) {
+        let idem = id;
         if (productos[id].email === loginData.email) {
           if (productos[id].comprados) {
             for (let key in productos[id].comprados) {
@@ -124,7 +138,12 @@ function App() {
                   } else if (operation === "sub") {
                     newNumProducto = Number(numProducto) - Number(1);
                   }
-                  axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '/numProducto.json?auth=' + loginData.idToken, newNumProducto)
+                  if (productos[id].id) {
+                    idem = productos[id].id;
+                  } else {
+                    idem = id;
+                  }
+                  axios.put('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + idem + '/comprados/' + key + '/numProducto.json?auth=' + loginData.idToken, newNumProducto)
                     .then((response) => {
                       establecerProductos();
                     })
@@ -147,11 +166,17 @@ function App() {
   // Funcion para eliminar productos del carrito
   const quitarCarrito = (idProducto) => {
     for (let id in productos) {
+      let idem = id;
       if (productos[id].email === loginData.email) {
         for (let key in productos[id].comprados) {
           if (productos[id].comprados[key]) {
             if (productos[id].comprados[key].idProducto === idProducto) {
-              axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + id + '/comprados/' + key + '.json?auth=' + loginData.idToken)
+              if (productos[id].id) {
+                idem = productos[id].id;
+              } else {
+                idem = id;
+              }
+              axios.delete('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/carrito/' + idem + '/comprados/' + key + '.json?auth=' + loginData.idToken)
                 .then((response) => {
                   establecerProductos();
                 })
@@ -182,6 +207,7 @@ function App() {
           <Route path="login/misPedidos/:id" element={<MisPedidos loginData={loginData} productosTienda={productosTienda} />}></Route>
           <Route path="/agradecimiento" element={<Agradecimiento loginData={loginData} />}></Route>
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/registro" element={<Registro actualizarLogin={actualizarLogin} loginData={loginData} productos={productos} />}></Route>
         </Routes>
       </AutContext.Provider>
     </div>

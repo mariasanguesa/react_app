@@ -51,7 +51,7 @@ function Header() {
                             <Link to="/" style={{ textDecoration: 'none', 'color': `${activeInicio ? 'pink':'black'}`, margin:'10px' }} onClick={inicioHandler}><Nav>INICIO</Nav></Link>
                             <Link to="/tienda" style={{ textDecoration: 'none', 'color': `${activeTienda ? 'pink':'black'}`, margin:'10px' }} onClick={tiendaHandler} >TIENDA</Link>
                             <Link to="/login" style={{ textDecoration: 'none', 'color': 'black', margin:'10px' }}  onClick={loginHandler}>{activeLogin ? <PersonFill/>:<Person/>}</Link>
-                            <Link class="shopping-cart" to="/carrito" style={{ textDecoration: 'none', 'color': 'black', margin:'10px' }}  onClick={bagHandler}>{activeBag ? <BagFill/>:<Bag/>}</Link>
+                            <Link to="/carrito" style={{ textDecoration: 'none', 'color': 'black', margin:'10px' }}  onClick={bagHandler}>{activeBag ? <BagFill/>:<Bag/>}</Link>
                             
                         </Nav>
                     </Container>

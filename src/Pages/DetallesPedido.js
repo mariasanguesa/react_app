@@ -19,14 +19,14 @@ const DetallesPedido = (props) => {
                         <p><b>Mi pedido</b></p>
                     </div>
                     <div >
-                        <ProductosDetalle productos={props.productos} productosTienda={props.productosTienda} añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito} />
+                        <ProductosDetalle loginData={props.loginData} productos={props.productos} productosTienda={props.productosTienda} añadirCarrito={props.añadirCarrito} quitarCarrito={props.quitarCarrito} />
                     </div>
                 </Col>
                 <Col md={3}>
                     <div className="border-bottom">
                         <p ><b>Resumen del pedido</b></p>
                     </div>
-                    <TotalPedido productos={props.productos} productosTienda={props.productosTienda} />
+                    <TotalPedido loginData={props.loginData} productos={props.productos} productosTienda={props.productosTienda} />
                 </Col>
             </Row>
         </Container>;

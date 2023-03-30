@@ -45,7 +45,7 @@ const Carrito = (props) => {
                     <div className="border-bottom">
                         <p ><b>Resumen del pedido</b></p>
                     </div>
-                    <TotalPedido productos={props.productos} productosTienda={props.productosTienda} />
+                    <TotalPedido loginData={props.loginData} productos={props.productos} productosTienda={props.productosTienda} />
 
                     <div className="text-center align-items-center justify-content-center">
                         <Button variant="outline-dark" onClick={realizarPedido}>Realizar pedido</Button>

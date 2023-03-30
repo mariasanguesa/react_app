@@ -93,14 +93,14 @@ const ProductosPedido = (props) => {
                         <Accordion.Body>
                             {
                                 arrayFinal.map((elemento) => {
-                                    return (
+                                    return (                                        
                                         <ProductoPedido key={elemento.id} producto={elemento} />
                                     )
                                 })
                             }
                             <div className='mt-3'>
                                 <p>Direccion de envío: {productos[x].direccion}, {productos[x].poblacion}</p>
-                                <p>Persona de contacto: {productos[x].nombre}, {productos[x].apellidos}</p>
+                                <p>Persona de contacto: {productos[x].apellidos}, {productos[x].nombre}</p>
                                 <ProgressBar animated now={35} />
                                 <p style={{ textAlign: "center" }}><i>El pedido está en camino</i></p>
                             </div>

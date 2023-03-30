@@ -40,7 +40,6 @@ const Login = (props) => {
         axios.post(autContext, authData)
             .then((response) => {
                 props.actualizarLogin(true, response.data);
-                alert('El usuario ha iniciado sesión.');
             })
             .catch((error) => {
                 alert('El usuario o contraseña no son correctos.');
@@ -86,6 +85,7 @@ const Login = (props) => {
                                 <button type="submit" className="btn btn-outline-dark">
                                     Iniciar sesión
                                 </button>
+                                <Button variant="link" as={Link} to={'/registro'}>¿Todavía no tienes cuenta? Registrate aquí</Button>
                             </div>
                         </div>
                     </form>
@@ -102,7 +102,7 @@ const Login = (props) => {
                 <h6>Este es tu perfil de Barras Go.</h6>
                 <br></br>
                 <div>
-                    <Button variant="btn btn-outline-dark" as={Link}to={`misPedidos/${props.loginData.email}`}>Ver mis pedidos</Button>
+                    <Button variant="btn btn-outline-dark" as={Link} to={`misPedidos/${props.loginData.email}`}>Ver mis pedidos</Button>
                 </div>
                 <br></br>
                 <div>

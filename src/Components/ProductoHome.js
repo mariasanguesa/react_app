@@ -10,8 +10,10 @@ const ProductoHome = (props) => {
 
     const [buttonTextState, setButtonTextState] = useState(true);
     const [buttonText, setButtonText] = useState(<><Bag style={{ marginBottom: "5px", marginRight: "2px" }}/> Añadir al carrito</>); 
-
+    
+    // Cada vez que buttonText cambie de valor se ejecutará la función useEffect
     useEffect(() => {
+        // Para volver al estado inicial
             setTimeout(() => {
                 setButtonText(<><Bag style={{ marginBottom: "5px", marginRight: "2px" }}/> Añadir al carrito</>);
                 setButtonTextState(true);
@@ -29,7 +31,7 @@ const ProductoHome = (props) => {
                 // Si se cumple condición lo deja en el array
                 return elemento.email === props.loginData.email;
             })
-
+            
             if (copiaProductos[0].comprados) {
                 let arrayComprados = [];
                 Object.values(copiaProductos[0].comprados).map((elemento) => {
@@ -44,22 +46,15 @@ const ProductoHome = (props) => {
                     }
                 } else {
                     props.añadirCarrito(props.producto, -1, "add");
-
                 }
 
             } else {
-
                 props.añadirCarrito(props.producto, 0, "add");
             }
         } else {
-            //alert('Hace falta hacer login para poder añadir productos al carrito.');
+            alert('Hace falta hacer login para poder añadir productos al carrito.');
         }
-
-
-
     }
-
-
 
     return (
         <>
@@ -74,7 +69,6 @@ const ProductoHome = (props) => {
                         <div className="text-center align-items-center justify-content-center" >
                             <Button id="button-añadirCarrito" variant={`${buttonTextState ? 'dark':'outline-success'}`} onClick={añadirHandler}> {buttonText} </Button>
                         </div>
-
                     </Card.Body>
                 </Card>
             </Col>

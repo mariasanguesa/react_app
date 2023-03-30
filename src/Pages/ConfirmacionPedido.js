@@ -32,13 +32,20 @@ const ConfirmacionPedido = (props) => {
         } else {
             // Enviar a la página de agradecimiento
             navega('/agradecimiento');
+            let numPro = 0;
+            for (let id in props.productos) {
+                if (props.productos[id].email === props.loginData.email) {
+                    numPro = id;
+                }
+            }
+
             const pedido = {
                 nombre: nombre,
                 apellidos: apellidos,
                 direccion: direccion,
                 poblacion: poblacion,
                 email: props.loginData.email,
-                productos: props.productos[0].comprados
+                productos: props.productos[numPro].comprados
             }
 
             axios.post('https://react-app-1c2eb-default-rtdb.europe-west1.firebasedatabase.app/pedidos.json?auth=' + props.loginData.idToken, pedido)
