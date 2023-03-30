@@ -32,11 +32,33 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.flying{
-  background-color:red
+#button-añadirCarrito:active {
+  animation-name: pulse;
+  animation-duration: 1s;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 1;
+
+  }
+
+  50% {
+    transform: scale(0.75);
+    opacity: 0.25;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+
+  }
+
 }
